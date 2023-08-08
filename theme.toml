@@ -1,0 +1,23 @@
+# https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration
+
+name = "Heyo"
+license = "MIT"
+licenselink = "https://github.com/LucasVadilho/heyo-hugo-theme/blob/master/LICENSE"
+description = "Heyo is a responsive, minimalist and pretty theme built for hugo, based on Alexander Bilz Anatole."
+
+homepage = "https://github.com/LucasVadilho/heyo-hugo-theme"
+
+demosite = "https://heyo-theme.oioipio.com/"
+
+tags = ["blog", "responsive", "personal", "clean", "minimalist", "light", "dark", "dark mode"]
+features = ["blog", "responsive", "mobile", "fontawesome", "analytics", "math"]
+min_version = "0.59.1"
+
+[author]
+    name = "Lucas David Vadilho"
+    homepage = "https://oioipio.com"
+
+[original]
+    author = "Alexander Bilz"
+    homepage = "https://alexbilz.com"
+    repo = "https://github.com/lxndrblz/anatole"

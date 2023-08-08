@@ -1,0 +1,25 @@
+<div class="page-top">
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false" >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    <ul class="nav" id="navMenu">
+        {{ $currentPage := . }}
+        {{ range .Site.Menus.main }}
+            {{ $isCurrent := eq (.URL | relLangURL) $currentPage.RelPermalink }}
+            <li><a {{ if $isCurrent }} class="current"{{end}} href="{{ .URL | relLangURL}}" {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer" {{ end }} title="{{ .Title }}">{{ .Name }}</a></li>
+        {{ end }}
+        <li class="grow"></li>
+        {{ if .Site.IsMultiLingual }}
+            {{ range $.Site.Home.Translations }}
+                <li><a href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</a></li>
+            {{ end }}
+        {{ end }}
+        <li>
+            <a class="theme-switch" title="Switch Theme">
+                <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,27 @@
+[category]
+other = "category"
+
+[tag]
+other = "tag"
+
+[reading_time]
+one = "One minute"
+other = "{{ .Count }} minutes"
+
+[page_not_found]
+other = "Page Not Found"
+
+[page_does_not_exist]
+other = "Sorry, this page does not exist."
+
+[head_back]
+other = "You can head back to <a style=\"color:var(--a-color)\" href=\"{{ . }}\">homepage</a>."
+
+[comments]
+other = "comments"
+
+[table_of_contents]
+other = "Table of Contents"
+
+[description]
+other = "Call me Jane"

@@ -1,0 +1,93 @@
+<head>
+    <title>{{ with .Title }}{{ . }} · {{ end }}{{.Site.Params.author}}</title>
+    <meta charset="utf-8">
+    
+    <!-- Hugo meta -->
+    {{- hugo.Generator -}}
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="description" content="{{ .Site.Params.description }}">
+    
+    <!-- Styles -->
+    {{ $style := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" type="text/css" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous" type="text/css">
+    
+    <!-- Custom css -->
+    {{- $css := "" -}}
+    {{- range .Site.Params.customCss -}}
+        {{ $css := resources.Get . | fingerprint }}
+        <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" type="text/css">
+    {{- end -}}
+
+    <!-- Heyo header -->
+    {{ $anatole := resources.Get "js/heyo-header.js" }}
+    {{ $secureJS := $anatole |  resources.Minify | resources.Fingerprint }}
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
+    
+    <!-- Computer Modern Font -->
+    {{ $fonts := resources.Get "css/fonts.css" | resources.Fingerprint }}
+    <link rel="stylesheet" type="text/css" href="{{ $fonts.Permalink }}" integrity="{{ $fonts.Data.Integrity }}" crossorigin="anonymous">
+
+    <!-- Sidebar TOC -->
+    {{ $toc := resources.Get "js/sidebar-toc.js" }}
+    {{ $secureJS := $toc |  resources.Minify | resources.Fingerprint }}
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
+
+    <!-- Sidebar sketch -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" defer></script>
+
+    {{ $graph := resources.Get "js/sketch-graph.js" }}
+    {{ $secureJS := $graph | resources.Fingerprint }}
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
+    {{ $dr := resources.Get "js/sketch-digitalRain.js" }}
+    {{ $secureJS := $dr | resources.Fingerprint }}
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
+    {{ $cbs := resources.Get "js/sketch-circleBrushStrokes.js" }}
+    {{ $secureJS := $cbs | resources.Fingerprint }}
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
+    {{ $meta := resources.Get "js/sketch-meta.js" }}
+    {{ $secureJS := $meta | resources.Fingerprint }}
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
+    {{ $sketch := resources.Get "js/sidebar-sketch.js" }}
+    {{ $secureJS := $sketch |  resources.Minify | resources.Fingerprint }}
+    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{{ .Site.Params.favicon | absURL }}favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.favicon | absURL }}apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.Params.favicon | absURL }}favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.Params.favicon | absURL }}favicon-16x16.png">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{ with .OutputFormats.Get "rss" -}}
+        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+    
+    <!-- Custom JS -->
+    {{- $js := "" -}}
+    {{- range .Site.Params.customJs -}}
+        {{- if or (in . "http://") (in . "https://") -}}
+            <script src="{{ . | relURL }}"></script>
+        {{- else -}}
+            {{- $customJS := resources.Get . -}}
+            {{- if $customJS -}}
+                {{- if eq $js "" -}}
+                    {{- $js = $customJS -}}
+                {{- else -}}
+                    {{- $js = slice $js $customJS | resources.Concat "js/custom.js" -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- if ne $js "" -}}
+        {{- $secureJS := $js |  resources.Minify | resources.Fingerprint -}}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
+    {{- end -}}
+
+    <!-- Twitter Cards -->
+    {{ template "_internal/twitter_cards.html" . }}
+</head>

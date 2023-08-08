@@ -1,0 +1,28 @@
+[category]
+other = "Categoria"
+
+[tag]
+other = "tag"
+
+[reading_time]
+one = "Um minuto"
+other = "{{ .Count }} minutos"
+
+# Não funciona no 404
+[page_not_found]
+other = "aPage Not Found"
+
+[page_does_not_exist]
+other = "Sorry, this page does not exist."
+
+[head_back]
+other = "You head back to <a style=\"color:var(--a-color)\" href=\"{{ . }}\">homepage</a>."
+
+[comments]
+other = "comentários"
+
+[table_of_contents]
+other = "Índice"
+
+[description]
+other = "Call me Jane"

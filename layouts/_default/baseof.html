@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{- site.Language.Lang -}}" data-theme="{{- .Site.Params.displayMode -}}">
+    {{- partial "head.html" . -}}
+    <body>
+        <div class="main">
+            {{ partial "navbar.html" . }}
+            {{ partial "sidebar.html" . }}
+            <div class="content">
+                {{- block "main" . }}{{- end }}
+                <div class="grow"></div>
+                {{ partial "built-with.html" . }}
+            </div>
+        </div>
+        {{ partial "footer.html" . }}
+    </body>
+</html>

@@ -1,0 +1,13 @@
+{{ $translations := .AllTranslations }}
+
+{{ if gt (len $translations) 1 }}
+    {{ if $translations }}
+        <i class="fa fa-language" aria-hidden="true"></i>
+    {{ end }}
+
+    <span>
+        {{ range $translations }}
+            <a href="{{ .Permalink }}" title="{{ .Language.LanguageName }}" class="language category">{{ .Language.LanguageName }}</a>
+        {{ end }}
+    </span>
+{{ end }}

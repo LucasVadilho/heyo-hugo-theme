@@ -1,0 +1,48 @@
+<div class="sidebar" id="sidebar">
+    <div class="top-toc">
+        <img src="{{ .Site.Params.profilePicture | absURL }}" alt="profile picture">
+        
+        <a href="/">{{ .Site.Params.Title }}</a>
+    </div>
+    
+    <div class="middle-sidebar grow" id="middle-sidebar">
+        {{ if .Params.showToc }}
+            <div class="title-toc" id="title-toc">
+                <h6>{{ i18n "table_of_contents"}}</h6>
+            </div>
+            {{/* Insert TOC from hugo
+                If the document was rendered by blogdown .TableOfContents is empty
+                TOC from blogdown is managed at sidebar-toc.js
+            */}}
+            {{ .TableOfContents }}
+        {{ else }}
+            {{ $sketch := "" }}
+            {{ if (isset .Params "sketch") }}
+                {{ $sketch = .Params.sketch }}
+            {{ else if (isset site.Params "sketch") }}
+                {{ $sketch = site.Params.sketch }}
+            {{ end }}
+
+            {{ if $sketch.enable }}
+                {{ $use := cond (isset $sketch "use") $sketch.use "meta" }}
+                {{ $displayOptions := cond (isset $sketch "displayoptions") $sketch.displayOptions true }}
+                
+                <div id="sidebar-sketch" data-sketch="{{ $use }}" data-sketch-show-hover="{{ $displayOptions }}"></div>
+            {{ end }}
+        {{ end }}
+    </div>
+
+    <div class="footer">
+        <ul class="social-links">
+            {{ range $item := site.Params.socialIcons }}
+            <li>
+                <a href="{{ $item.url }}" target="_blank" rel="noopener noreferrer" rel="me" aria-label="{{ $item.title }}">
+                    <i class="fa {{ $item.icon }}" aria-hidden="true"></i>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+
+        <div class="by">by {{ .Site.Params.author }} <b>·</b> {{ now.Format "2006"}}</div>
+    </div>
+</div>

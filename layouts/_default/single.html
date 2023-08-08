@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="post">
+    <div class="post-title">
+        <h1>{{ .Title }}</h1>
+        {{ if eq .Type "post"}}
+            {{ partial "post-header" . }}
+        {{ end }}
+    </div>
+    <div class="post-content">
+        {{ .Content }}
+    </div>
+    <div class="post-footer">
+        <div class="info">
+            {{ with .Page.Params.Categories }}{{ partial "taxonomy/categories.html" . }}{{ end }}
+            {{ with .Page.Params.Tags }}{{ partial "taxonomy/tags.html" . }}{{ end }}
+        </div>
+        {{ partial "list-badges" . }}
+    </div>
+    {{ if eq .Type "post"}}
+        {{ if .Site.DisqusShortname -}}
+        <div id="fb_comments_container">
+            <h2>{{ i18n "comments" }}</h2>
+            {{ template "_internal/disqus.html" . }}
+        </div>
+        {{- end }}
+    {{ end }}
+</div>
+{{ end }}
