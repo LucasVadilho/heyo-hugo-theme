@@ -186,7 +186,7 @@ class DigitalRain {
         this.rs = [];
         let i = 0;
         let intervalId = setInterval(() => {
-            this.rs.push(new Rain('katakana'));
+            this.rs.push(new Rain('braile'));
             if(++i == 15) window.clearInterval(intervalId);
         }, 200);
 

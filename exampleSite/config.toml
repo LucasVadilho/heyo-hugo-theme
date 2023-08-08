@@ -44,7 +44,7 @@ paginate = 10
   displayOptions = true
   # use = "Graph" # Graph, Digital Rain, or Circles
   # use = "Digital Rain" # Graph, or Digital Rain
-  use = "Circles"
+  use = "Digital Rain"
 
 ## Math settings
 [params.math]
