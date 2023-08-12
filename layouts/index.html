@@ -39,9 +39,10 @@
                                     <a class="tag" href="{{ ( printf "tags/%s/" ( . | urlize ) ) | relLangURL }}">{{ . }}</a>
                                 {{- end -}}
                             {{ end }}
+                            {{ partial "list-badges" . }}
                         </div>
                     </div>
-                    {{ partial "list-badges" . }}
+                    {{/* partial "list-badges" . */}}
                 </div>
             </div>
         </div>

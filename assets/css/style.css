@@ -1069,14 +1069,11 @@ a.btn {
     }
 }
 
-.badges {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    padding-top: 10px;
-}
-
 .badge {
     display: inline-block;
-    padding-right: 10px;
+    vertical-align: middle;
+}
+
+.badge img {
+    display: block;
 }

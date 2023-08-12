@@ -1,32 +1,28 @@
 {{/*  Uses https://badgen.net/ to generate the badges */}}
 
-<div class="badges">
 {{ if isset .Params "badges" }}
     {{ $badges := .Params.badges }}
     {{ range $badge := $badges }}
-        <div class="badge">
-            {{ $flat := cond (or (not (isset $badge "flat")) ($badge.flat)) "flat." "" }}
-            {{ $icon := cond (isset $badge "icon") (print "icon=" $badge.icon) "" }}
-            {{ $show_subject := cond (and (isset $badge "show_subject") ($badge.show_subject)) "" "label" }}
-            {{ $badge_color := cond (isset $badge "color") $badge.color ""}}
-            {{ $icon_bg_color := cond (isset $badge "icon_bg_color") (print "labelColor=" $badge.icon_bg_color) ""}}
+        {{ $flat := cond (or (not (isset $badge "flat")) ($badge.flat)) "flat." "" }}
+        {{ $icon := cond (isset $badge "icon") (print "icon=" $badge.icon) "" }}
+        {{ $show_subject := cond (and (isset $badge "show_subject") ($badge.show_subject)) "" "label" }}
+        {{ $badge_color := cond (isset $badge "color") $badge.color ""}}
+        {{ $icon_bg_color := cond (isset $badge "icon_bg_color") (print "labelColor=" $badge.icon_bg_color) ""}}
 
-            {{ $img_src := printf "https://%sbadgen.net/badge/%s/%s/%s?%s&%s&%s" 
-                $flat
-                $badge.subject
-                $badge.status
-                $badge_color
-                $icon
-                $icon_bg_color
-                $show_subject
-            }}
-            
-            {{ if isset $badge "url" }}
-                <a target="_blank" href="{{ $badge.url }}"><img src="{{ $img_src }}" loading="lazy"/></a>
-            {{ else }}
-                <img src="{{ $img_src }}" loading="lazy"/>
-            {{ end }}
-        </div>
+        {{ $img_src := printf "https://%sbadgen.net/badge/%s/%s/%s?%s&%s&%s" 
+            $flat
+            $badge.subject
+            $badge.status
+            $badge_color
+            $icon
+            $icon_bg_color
+            $show_subject
+        }}
+        
+        {{ if isset $badge "url" }}
+            <a target="_blank" href="{{ $badge.url }}"><img class="badge" src="{{ $img_src }}" loading="lazy"/></a>
+        {{ else }}
+            <img class="badge" src="{{ $img_src }}" loading="lazy"/>
+        {{ end }}
     {{ end }}
 {{ end }}
-</div>
