@@ -21,6 +21,8 @@
                 {{ $sketch = .Params.sketch }}
             {{ else if (isset site.Params "sketch") }}
                 {{ $sketch = site.Params.sketch }}
+            {{ else }}
+                {{ $sketch = dict "enable" "True"}}
             {{ end }}
 
             {{ if $sketch.enable }}
@@ -42,7 +44,7 @@
             {{ range $item := site.Params.socialIcons }}
             <li>
                 <a href="{{ $item.url }}" target="_blank" rel="noopener noreferrer" rel="me" aria-label="{{ $item.title }}">
-                    <i class="fa {{ $item.icon }}" aria-hidden="true"></i>
+                    <i class="{{ $item.icon }}" aria-hidden="true"></i>
                 </a>
             </li>
             {{ end }}

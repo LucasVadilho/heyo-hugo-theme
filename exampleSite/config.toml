@@ -1,5 +1,5 @@
 title = "Heyo"
-theme = "heyo-hugo-theme"
+theme = "heyo"
 baseURL = "/"
 languageCode = "en"
 DefaultContentLanguage = "en"
@@ -54,27 +54,29 @@ paginate = 10
 
 ## Math settings
 [params.math]
-  enable = true # global support, you can use configure it per page
-  use = "mathjax" # katex or mathjax, default is mathjax
+  # global support, you can also configure it per page
+  enable = true
+  # katex or mathjax, default is mathjax
+  use = "mathjax"
 
 ## Social links
 [[params.socialIcons]]
-icon = "fa-linkedin" # Font-awesome icon
+icon = "fab fa-linkedin" # Font-awesome icon
 title = "Linkedin"
 url = "https://linkedin.com/"
 
 [[params.socialIcons]]
-icon = "fa-github"
+icon = "fab fa-github"
 title = "GitHub"
 url = "https://github.com/lucasVadilho/lucas-anatole/"
 
 [[params.socialIcons]]
-icon = "fa-instagram"
+icon = "fab fa-instagram"
 title = "instagram"
 url = "https://www.instagram.com/"
 
 [[params.socialIcons]]
-icon = "fa-envelope"
+icon = "fas fa-envelope"
 title = "e-mail"
 url = "mailto:lucas.vadilho@gmail.com"
 
