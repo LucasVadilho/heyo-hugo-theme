@@ -5,9 +5,10 @@ const SKETCHES = {
 }
 
 class Meta {
-    constructor(name, showHover) {
+    constructor(name, showHover, sketchOptions) {
         this.name = name;
         this.showHover = showHover;
+        this.sketchOptions = sketchOptions;
 
         this.sketchNames = Object.keys(SKETCHES);
 
@@ -39,7 +40,7 @@ class Meta {
         // we will pop on sketch change!
         push();
 
-        this.sketch = new SKETCHES[this.name];
+        this.sketch = new SKETCHES[this.name](this.sketchOptions);
 
         this.sketch.setup();
 

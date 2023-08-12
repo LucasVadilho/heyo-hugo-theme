@@ -9,8 +9,9 @@ function setup() {
 
     let sketchName = getCookie('sketch-name') || container.getAttribute('data-sketch');
     let showHoverOptions = container.getAttribute('data-sketch-show-hover') === 'true';
+    let sketchOptions = JSON.parse(container.getAttribute('data-sketch-starting'));
 
-    sketch = new Meta(sketchName, showHoverOptions);
+    sketch = new Meta(sketchName, showHoverOptions, sketchOptions);
 }
 
 function draw() {

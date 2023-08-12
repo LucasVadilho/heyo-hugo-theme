@@ -200,7 +200,7 @@ class CirclesBrushStrokes {
         background(theme.bg);
 
         if(theme.name == 'dark') {
-            this.setColor('rgb(205, 205, 219)');
+            this.setColor('rgb(0, 0, 0)');
         } else {
             this.setColor('rgb(34, 22, 22)');
         }

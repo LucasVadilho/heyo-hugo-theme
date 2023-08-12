@@ -25,9 +25,14 @@
 
             {{ if $sketch.enable }}
                 {{ $use := cond (isset $sketch "use") $sketch.use "meta" }}
+                {{ $starting := cond (isset $sketch "startingconfig") $sketch.startingconfig "" }}
                 {{ $displayOptions := cond (isset $sketch "displayoptions") $sketch.displayOptions true }}
                 
-                <div id="sidebar-sketch" data-sketch="{{ $use }}" data-sketch-show-hover="{{ $displayOptions }}"></div>
+                <div
+                    id="sidebar-sketch"
+                    data-sketch="{{ $use }}"
+                    data-sketch-starting="{{ $starting }}"
+                    data-sketch-show-hover="{{ $displayOptions }}"></div>
             {{ end }}
         {{ end }}
     </div>

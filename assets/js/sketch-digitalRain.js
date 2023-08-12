@@ -176,20 +176,23 @@ class Rain {
 }
 
 class DigitalRain {
-    constructor() { }
+    constructor({kind, nStreams} = {}) {
+        this.kind = kind || 'katakana';
+        this.nStreams = nStreams || 2;
+     }
 
     setup() {
         colorMode(HSB);
 
         // this.rs = Array.from({ length: 15 }, () => new Rain('katakana'))
+
         // to avoid a torrent start
         this.rs = [];
         let i = 0;
         let intervalId = setInterval(() => {
-            this.rs.push(new Rain('braile'));
-            if(++i == 15) window.clearInterval(intervalId);
+            this.rs.push(new Rain(this.kind));
+            if(++i == this.nStreams) window.clearInterval(intervalId);
         }, 200);
-
         
         noStroke();
     }
@@ -215,7 +218,7 @@ class DigitalRain {
                 
         Object.keys(SYMBOLS).map(k => styleSelect.option(k));
         styleSelect.option('random');
-        styleSelect.selected('katakana');
+        styleSelect.selected(this.kind);
 
         styleSelect.changed(() => {
             this.style = styleSelect.value();
@@ -253,7 +256,7 @@ class DigitalRain {
             drawingContext.shadowBlur = shadowBlur.value();
         });
 
-        let shadowOffsetSlider = createSlider(0, 10, 0, 0.1);
+        let shadowOffsetSlider = createSlider(-10, 10, 0, 0.1);
         shadowOffsetSlider.input(() => {
             drawingContext.shadowOffsetY = shadowOffsetSlider.value();
         });

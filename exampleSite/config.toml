@@ -1,5 +1,5 @@
 title = "Heyo"
-theme = "heyo"
+theme = "heyo-hugo-theme"
 baseURL = "/"
 languageCode = "en"
 DefaultContentLanguage = "en"
@@ -7,6 +7,14 @@ summarylength = 100
 enableEmoji = true
 enableRobotsTXT = true
 paginate = 10
+
+# Disqus comments
+# https://gohugo.io/templates/internal/#configure-disqus
+# disqusShortname = ""
+
+# Google Analytics
+# https://gohugo.io/templates/internal/#google-analytics
+# googleAnalytics = ""
 
 [Languages]
   [Languages.en]
@@ -19,32 +27,30 @@ paginate = 10
     weight = 2
     LanguageName = "pt-br"
 
-# Enable Disqus
-# disqusShortname = ""
-
-# Google Analytics
-# googleAnalytics = "UA-123-45"
-
 [params]
   title = "I'm Jane Doe"
   author = "Jane Doe"
   description = "Call me Jane"
   profilePicture = "images/profile.png"
-  keywords = ""
   favicon = "favicons/"
   customCss = []
   customJs = []
-  mainSections = ["post"]
   displayMode = "dark"
 
 # Sketch settings
-## you can also enable or disable it per page
+# you can also enable or disable it per page
 [params.sketch] 
   enable = true 
   displayOptions = true
-  # use = "Graph" # Graph, Digital Rain, or Circles
-  # use = "Digital Rain" # Graph, or Digital Rain
+  # Graph, Digital Rain, or Circles
   use = "Digital Rain"
+  # JSON that is passed to the sketch constructor
+  # You can check all the possible configurations in
+  startingConfig = """{
+    "kind": "chess",
+    "nStreams": 10
+  }"""
+
 
 ## Math settings
 [params.math]
@@ -72,7 +78,7 @@ icon = "fa-envelope"
 title = "e-mail"
 url = "mailto:lucas.vadilho@gmail.com"
 
-## Menu items
+# Menu items
 [menu]
 [[Languages.en.menu.main]]
 name = "Home"

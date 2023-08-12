@@ -11,13 +11,6 @@
     <!-- Styles -->
     {{ $style := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" type="text/css" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous" type="text/css">
-    
-    <!-- Custom css -->
-    {{- $css := "" -}}
-    {{- range .Site.Params.customCss -}}
-        {{ $css := resources.Get . | fingerprint }}
-        <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" type="text/css">
-    {{- end -}}
 
     <!-- Heyo header -->
     {{ $anatole := resources.Get "js/heyo-header.js" }}
@@ -66,27 +59,15 @@
         {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
     
-    <!-- Custom JS -->
-    {{- $js := "" -}}
-    {{- range .Site.Params.customJs -}}
-        {{- if or (in . "http://") (in . "https://") -}}
-            <script src="{{ . | relURL }}"></script>
-        {{- else -}}
-            {{- $customJS := resources.Get . -}}
-            {{- if $customJS -}}
-                {{- if eq $js "" -}}
-                    {{- $js = $customJS -}}
-                {{- else -}}
-                    {{- $js = slice $js $customJS | resources.Concat "js/custom.js" -}}
-                {{- end -}}
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-
-    {{- if ne $js "" -}}
-        {{- $secureJS := $js |  resources.Minify | resources.Fingerprint -}}
-        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
-    {{- end -}}
+    <!-- Custom js -->
+    {{ range .Site.Params.customJs }}
+        <script src="{{ . | absURL }}"></script>
+    {{ end }}
+    
+    <!-- Custom css -->
+    {{ range .Site.Params.customCss }}
+        <link rel="stylesheet" href="{{ . | absURL }}" type="text/css">
+    {{ end }}
 
     <!-- Twitter Cards -->
     {{ template "_internal/twitter_cards.html" . }}
