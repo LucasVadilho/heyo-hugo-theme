@@ -204,6 +204,12 @@ class CirclesBrushStrokes {
         } else {
             this.setColor('rgb(34, 22, 22)');
         }
+
+        this.pointGenerator = new circleGenerator();
+        let {x, y} = this.pointGenerator.getCoordinates();
+
+        this.x = x;
+        this.y = y;
     }
     
     mouseClicked(e) {}
