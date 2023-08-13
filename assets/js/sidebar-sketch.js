@@ -7,9 +7,9 @@ function setup() {
 
     updateTheme();
 
-    let sketchName = getCookie('sketch-name') || container.getAttribute('data-sketch');
+    let sketchName = getCookie('sketch-name') || container.getAttribute('data-sketch') || 'Graph';
     let showHoverOptions = container.getAttribute('data-sketch-show-hover') === 'true';
-    let sketchOptions = JSON.parse(container.getAttribute('data-sketch-starting'));
+    let sketchOptions = JSON.parse(container.getAttribute('data-sketch-starting') || "{}");
 
     sketch = new Meta(sketchName, showHoverOptions, sketchOptions);
 }

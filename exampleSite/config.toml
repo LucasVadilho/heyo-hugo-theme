@@ -68,7 +68,7 @@ url = "https://linkedin.com/"
 [[params.socialIcons]]
 icon = "fab fa-github"
 title = "GitHub"
-url = "https://github.com/lucasVadilho/lucas-anatole/"
+url = "https://github.com/LucasVadilho/heyo-hugo-theme"
 
 [[params.socialIcons]]
 icon = "fab fa-instagram"

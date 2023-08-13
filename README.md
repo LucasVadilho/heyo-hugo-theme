@@ -6,6 +6,7 @@ Heyo is a responsive, minimalist, lightweight, and pretty theme built for [hugo]
 
 - [x] Pretty visualizations in the sidebar
 - [x] Table of Contents in the sidebar
+- [ ] Callout shortcodes
 - [ ] Soon™
 
 ## Try it yourself
