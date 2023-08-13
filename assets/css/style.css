@@ -545,6 +545,14 @@ hr {
     margin: 20px 0;
 }
 
+.built-with a {
+    color: var(--a-color);
+}
+
+.built-with a:hover {
+    text-decoration: underline;
+}
+
 .like-reblog-buttons {
     float: right;
 }
@@ -1076,4 +1084,28 @@ a.btn {
 
 .badge img {
     display: block;
+}
+
+/* Callouts */
+.callout {
+    padding: 0;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.callout-header {
+    display: flex;
+    padding: 10px;
+    color: #121213;
+    font-size: 18px;
+}
+
+.callout-icon {
+    padding-right: 5px;
+}
+
+.callout-body {
+    padding: 10px;
 }

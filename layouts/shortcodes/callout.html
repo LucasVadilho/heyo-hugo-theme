@@ -1,0 +1,45 @@
+{{ $kinds := dict 
+    "info" (dict
+        "icon" "fas fa-info-circle"
+        "color" "#3492FA")
+    "question" (dict
+        "icon" "fas fa-question-circle"
+        "color" "#717788"
+    )
+    "alert" (dict
+        "icon" "fas fa-exclamation-circle"
+        "color" "#FFC644"
+    )
+    "success" (dict
+        "icon" "fas fa-check-circle"
+        "color" "#46b146"
+    )
+    "nope" (dict
+        "icon" "fas fa-times-circle"
+        "color" "#e5442c"
+    )
+    "note" (dict
+        "icon" "far fa-clipboard"
+        "color" "#c961c9"
+    )
+}}
+
+{{ $kind := index $kinds (.Get "kind" | default "info") }}
+
+{{ $icon := safeCSS (.Get "icon" | default (index $kind "icon")) }}
+{{ $color := safeCSS (.Get "color" | default (index $kind "color")) }}
+
+{{ $title := .Get "title" | default "" }}
+{{ $content := .Get "content" | default "" }}
+
+<div class="callout">
+    <div class="callout-header" style="background: {{ $color }};">
+        <div class="callout-icon"><i class={{ $icon }}></i></div>
+        <div class="callout-title">{{ $title | markdownify}}</div>
+    </div>
+    {{ if not (eq $content "") }}
+    <div class="callout-body">
+        <div>{{ $content | markdownify}}</div>
+    </div>
+    {{ end }}
+</div>
