@@ -3,8 +3,8 @@
     {{ range $paginator.Pages }}
         <div class="post summary">
             {{ with .Params.thumbnail }}
-                <div class="thumbnail">
-                    <img src="{{ .src | absURL }}" alt="{{ .alt | default "" }}" loading="lazy">
+                <div class="thumbnail"  style="height: {{ .height }};">
+                    <img src={{ .src | absURL }} style="object-position: {{ .object_position }};" alt={{ .alt | default "thumbnail" }} loading="lazy">
                 </div>
             {{ end }}
             <div class="post-text grow">

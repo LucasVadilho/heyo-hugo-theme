@@ -1,5 +1,10 @@
 {{ define "main" }}
 <div class="post">
+    {{ with .Params.thumbnail }}
+    <div class="thumbnail" style="box-shadow: var(--box-shadow); height: {{ .height }};">
+        <img src={{ .src | absURL }} style="object-position: {{ .object_position }};" title={{ .alt | default "thumbnail" }} alt={{ .alt | default "thumbnail" }} loading="lazy">
+    </div>
+    {{ end }}
     <div class="post-title">
         <h1>{{ .Title }}</h1>
         {{ if eq .Type "post"}}
