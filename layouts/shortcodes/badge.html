@@ -1,0 +1,49 @@
+{{ $flat := .Get "flat" | default true }}
+
+{{ $generator := .Get "generator" | default "static" }}
+
+{{ $subject := .Get "subject" | default "subject" }}
+{{ $status := .Get "status" | default "status" }}
+
+{{ $color := .Get "color" | string }}
+{{ $icon := .Get "icon" }}
+{{ $label := .Get "label" }}
+{{ $label_color := .Get "label_color" | string }}
+{{ $scale := .Get "scale" | string }}
+
+{{ $url := .Get "url" | default false }}
+
+{{ $flat_txt := cond $flat "flat." "" }}
+
+{{ $img_src := printf "https://%sbadgen.net/%s/%s/%s?"
+    $flat_txt
+    $generator
+    $subject
+    $status
+}}
+
+{{ if $color }}
+    {{ $img_src = printf "%scolor=%s&" $img_src $color }}
+{{ end }}
+
+{{ if $icon }}
+    {{ $img_src = printf "%sicon=%s&" $img_src $icon }}
+{{ end }}
+
+{{ if or ($label) (eq $label "") }}
+    {{ $img_src = printf "%slabel=%s&" $img_src $label }}
+{{ end }}
+
+{{ if $label_color }}
+    {{ $img_src = printf "%slabelColor=%s&" $img_src $label_color }}
+{{ end }}
+
+{{ if $scale }}
+    {{ $img_src = printf "%sscale=%s" $img_src $scale }}
+{{ end }}
+
+{{ if $url }}
+    <a target="_blank" href={{ $url }}><img class="badge" src={{ $img_src }} alt={{ print $subject " " $status }} loading="lazy"/></a>
+{{ else }}
+    <img class="badge" src={{ $img_src }} alt={{ print $subject " " $status }} loading="lazy"/>
+{{ end }}
