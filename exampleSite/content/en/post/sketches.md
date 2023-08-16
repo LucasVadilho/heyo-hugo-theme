@@ -7,10 +7,12 @@ badges:
         subject: p5js
         status: p5js
         color: ed225d
-        icon_bg_color: ffffff
+        label: ""
+        label_color: grey
         url: https://p5js.org/
         icon: https://upload.wikimedia.org/wikipedia/commons/c/c6/P5.js_icon.svg
 tags: 
+    - theme
     - p5js
     - javascript
     - creative coding
@@ -60,4 +62,4 @@ Using `customJs` you can import your own javascript code, so all you have to do 
 1. Make sure that it implements the `setup` and `draw` methods (it can also implement `mouseWheel`, `mouseClicked`, and `getSettings`)
 1. Add your class to the `SKETCHES` object (`SKETCHES['yourName'] = yourClass`)
 1. Set `sketch.use` to `yourName`
-1. Consider sending a [pull request]() to share your sketch :heart:
+1. Consider sending a pull request in {{< theme >}} to share your sketch :heart:
