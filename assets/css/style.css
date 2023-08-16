@@ -164,7 +164,7 @@ tbody tr:nth-child(2n) {
 }
 
 tbody tr:hover {
-    color: var(--a-color);
+    background-color: var(--code-bg-color);
 }
 
 hr {
