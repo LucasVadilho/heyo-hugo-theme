@@ -17,7 +17,7 @@ heyo is a responsive, minimalist, and pretty theme built for [hugo](https://gohu
 - [x] [Open Graph](https://gohugo.io/templates/internal/#configure-open-graph) support
 - [ ] Soon™
 
-## Quickstart
+# Quickstart
 
 To try the `exampleSite` you just need to:
 
@@ -25,10 +25,11 @@ To try the `exampleSite` you just need to:
 git clone https://github.com/LucasVadilho/heyo-hugo-theme heyo
 cd heyo/exampleSite && hugo server --themesDir ../..
 ```
+<img align="right" width="200" alt="scan me to preview on mobile" src="https://github.com/LucasVadilho/heyo-hugo-theme/assets/7459017/6642e5b9-9b90-460c-9d45-18ae94bb5a6e"/>
 
-## Live preview
+# Live preview
 
-You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioipio.com/).
+You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioipio.com/). Also, scan the QR code to preview on mobile!
 
 # Credits
 
