@@ -1,17 +1,19 @@
 ---
 author: Lucas David Vadilho
-title: Callout shortcode
+title: Shortcode para callouts
 date: 2023-08-05
-description: How to add badges to your posts
+description: Como configurar callouts no heyo
 categories: ["heyo"]
 tags: ["theme", "shortcodes"]
 ---
 
-Check it out, {{< theme >}} has callouts now!
+Olha só, {{< theme >}} tem _callouts_ agora!
 
 <!--more-->
 
-# How to use it
+# Como usar
+
+Bem simples:
 
 ```go-html-template
 {{</* 
@@ -22,11 +24,12 @@ callout
 */>}}
 ```
 
-We have some pre-configured values for `kind`. But it's also possible to [customize](#customized) them!
+Nós temos alguns valores pré-configurados para `kind`. Mas também é possível [customizar](#customizados) seu callout!
 
 # Kinds
 
 ## Info
+
 {{< callout 
     kind="info"
     title="Here's something you should probably know"
@@ -78,13 +81,13 @@ The `title` can be empty, too.
     content="The speed of lights is _exactly equal_ to 299,792,458 m/s"
 >}}
 
-Feel free to suggest new ones [here](https://github.com/LucasVadilho/heyo-hugo-theme)!
+Você pode sugerir novos em {{< theme >}}!
 
-# Customized
+# Customizados
 
-You can customize the callout by choosing your own [Font Awesome](https://fontawesome.com/search) icon and color. All you need to do is add `icon` and `color` to the shortcode.
+Você pode escolher seu próprio ícone do [Font Awesome](https://fontawesome.com/search) e cor. Tudo que precisa fazer é adicionar `icon` e `color` no shortcode.
 
-## Example
+## Examplo
 
 ```
 {{</* callout 
@@ -95,7 +98,7 @@ You can customize the callout by choosing your own [Font Awesome](https://fontaw
 */>}}
 ```
 
-Will be rendered as:
+Será renderizado assim:
 
 {{< callout 
     title="Research"

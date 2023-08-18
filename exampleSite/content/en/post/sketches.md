@@ -1,7 +1,7 @@
 ---
 author: Lucas David Vadilho
 title: Sketches!
-date: 2023-05-11
+date: 2023-08-07
 badges:
     p5:
         subject: p5js
@@ -20,10 +20,11 @@ categories:
     - heyo
 ---
 
-Sketches are the pretty visualizations in Heyo's sidebar. The default ones were built using [p5.js](https://p5js.org/), a javascript library for creative coding.
+Sketches are the pretty visualizations in {{< theme >}}'s sidebar. The default ones were built using [p5.js](https://p5js.org/) -- a javascript library for creative coding.
+
 <!--more-->
 
-## Visualizations
+# Visualizations
 
 For now, we have the following visualizations:
 
@@ -34,11 +35,11 @@ For now, we have the following visualizations:
 | Circles | Drawing circles with a weird brush |
 
 
-Feel free to suggest or contribute new ones [here](gh)!
+Feel free to suggest or contribute new ones in {{< theme >}}!
 
-## Setting up
+# Setting up
 
-### Global Configurations
+## Global Configurations
 
 The sketch can be globally enabled by setting the param `sketch` in `config.toml`.
 
@@ -50,11 +51,11 @@ The sketch can be globally enabled by setting the param `sketch` in `config.toml
 
 [^1]: The Table of Contents will override the sketch
 
-### Per Page Basis
+## Per Page Basis
 
 Even with `sketch.enable = false` in `config.toml` you can still enable sketches on specific pages, all you need to do is set it up in page's front-matter. That enables you to show different sketches on different pages.
 
-## Implement your own sketch
+# Implement your own sketch
 
 Using `customJs` you can import your own javascript code, so all you have to do to implement your own sketch is:
 

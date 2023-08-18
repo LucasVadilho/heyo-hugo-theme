@@ -1,7 +1,7 @@
 ---
 author: Lucas David Vadilho
 title: Post Thumbnail
-date: 2023-08-01
+date: 2023-08-06
 thumbnail:
     src: 'images/thumbnail.jpg'
     alt: 'Imi em meio as flores'
@@ -9,6 +9,7 @@ thumbnail:
     height: 250px
 categories: ["heyo"]
 tags: ["theme", "shortcodes"]
+images: ['images/thumbnail.jpg']
 ---
 
 You can now add thumbnails to your posts in {{< theme >}}!
@@ -40,4 +41,4 @@ thumbnail:
 
 # Credits
 
-Imi -- the [character](https://www.tdvadilho.com/portfolio/?id=imiFlores) in this thumbnail -- was graciously provided by [TD Vadilho](https://www.tdvadilho.com/), you should checkout his work!
+Imi -- the [character](https://www.tdvadilho.com/portfolio/?id=imiFlores) in this thumbnail -- was graciously provided by TD Vadilho, you should checkout his [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/@TDVadilho)!

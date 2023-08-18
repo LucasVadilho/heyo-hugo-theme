@@ -1,13 +1,16 @@
 ---
 author: Lucas David Vadilho
 title: Rendering Math Stuff
-date: 2019-09-26
+date: 2023-08-03
 description: How to configure Math Typesetting in heyo
-math:
-    enable: true
+math: true
+tags: 
+    - theme
+categories:
+    - heyo
 ---
 
-This article shows how to configure your site with the {{< theme >}} theme to display pretty math.
+This article shows how to configure your site with {{< theme >}} theme to display $\LaTeX$.
 <!--more-->
 
 Math typesetting is achieved through JavaScript libraries. In {{< theme >}} you have the option of using either [MathJax 3](https://www.mathjax.org/) or [KaTeX](https://katex.org/).

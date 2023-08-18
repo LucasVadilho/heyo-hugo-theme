@@ -195,7 +195,7 @@ hr {
     grid-area: page-top;
     background-color: var(--bg-color);
     font-variant: small-caps;
-    z-index: 1;
+    z-index: 3;
 }
 
 .sidebar {

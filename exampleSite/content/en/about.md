@@ -1,28 +1,38 @@
-+++
-title = "About"
-description = "Hugo, the world’s fastest framework for building websites"
-date = "2019-02-28"
-aliases = ["about-us","about-hugo","contact"]
-author = "Hugo Authors"
-+++
+---
+author: Lucas David Vadilho
+title: "About"
+description: "About heyo"
+date: 2023-08-01
+---
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+{{< theme >}} is a responsive, minimalist, and pretty theme built for [hugo](https://gohugo.io/), based on Alexander Bilz's [Anatole](https://github.com/lxndrblz/anatole).
 
-Hugo makes use of a variety of open source projects including:
+## Features
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+- [x] [Cover images](https://heyo-theme.oioipio.com/post/thumbnail/)
+- [x] [Pretty visualizations](https://heyo-theme.oioipio.com/post/sketches/) in the sidebar
+- [x] [Table of Contents](https://heyo-theme.oioipio.com/post/sketches/post/toc/) in the sidebar
+- [x] [Callout shortcode](https://heyo-theme.oioipio.com/post/callouts/)
+- [x] [Badges shortcode](http://localhost:1313/post/badges/)
+- [x] Dark theme
+- [x] Support for custom CSS and JS
+- [x] [Multilingual support](https://gohugo.io/content-management/multilingual/) (english and brazilian portuguese, for now)
+- [x] [Open Graph](https://gohugo.io/templates/internal/#configure-open-graph) support
+- [ ] Soon™
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+## Quickstart
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
+To try the `exampleSite` you just need to:
 
-Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
+```sh
+git clone https://github.com/LucasVadilho/heyo-hugo-theme heyo
+cd heyo/exampleSite && hugo server --themesDir ../..
+```
 
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+## Live preview
 
+You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioipio.com/).
 
+# Credits
 
+All the images in `exampleSite` were graciously provided by TD Vadilho, you should checkout his [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/@TDVadilho)!

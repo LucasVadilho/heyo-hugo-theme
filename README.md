@@ -1,19 +1,35 @@
-# Heyo
+# heyo ![LICENSE](https://badgen.net/github/license/LucasVadilho/heyo-hugo-theme?icon=github&label=&color=grey) [![SUPPORT](https://badgen.net/static/kofi/Buy%20me%20a%20coffee%20%E2%9D%A4%ef%b8%8f?icon=kofi&label=&color=grey)](https://ko-fi.com/oioipio)
 
-Heyo is a responsive, minimalist, lightweight, and pretty theme built for [hugo](https://gohugo.io/), based on Alexander Bilz's [Anatole](https://github.com/lxndrblz/anatole).
+![](https://github-production-user-asset-6210df.s3.amazonaws.com/7459017/261717800-0741de5d-0b5e-4439-a04d-7523c44e3030.gif)
+
+heyo is a responsive, minimalist, and pretty theme built for [hugo](https://gohugo.io/), based on Alexander Bilz's [Anatole](https://github.com/lxndrblz/anatole).
 
 ## Features
 
-- [x] Pretty visualizations in the sidebar
-- [x] Table of Contents in the sidebar
-- [ ] Callout shortcodes
+- [x] [Cover images](https://heyo-theme.oioipio.com/post/thumbnail/)
+- [x] [Pretty visualizations](https://heyo-theme.oioipio.com/post/sketches/) in the sidebar
+- [x] [Table of Contents](https://heyo-theme.oioipio.com/post/sketches/post/toc/) in the sidebar
+- [x] [Callout shortcode](https://heyo-theme.oioipio.com/post/callouts/)
+- [x] [Badges shortcode](http://localhost:1313/post/badges/)
+- [x] Dark theme
+- [x] Support for custom CSS and JS
+- [x] [Multilingual support](https://gohugo.io/content-management/multilingual/) (english and brazilian portuguese, for now)
+- [x] [Open Graph](https://gohugo.io/templates/internal/#configure-open-graph) support
 - [ ] Soon™
 
-## Try it yourself
+## Quickstart
 
-To try the exampleSite you just need to:
+To try the `exampleSite` you just need to:
 
 ```sh
 git clone https://github.com/LucasVadilho/heyo-hugo-theme heyo
 cd heyo/exampleSite && hugo server --themesDir ../..
 ```
+
+## Live preview
+
+You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioipio.com/).
+
+# Credits
+
+All the images in `exampleSite` were graciously provided by TD Vadilho, you should checkout his [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/@TDVadilho)!

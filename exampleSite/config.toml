@@ -1,4 +1,4 @@
-title = "Heyo"
+title = "heyo"
 theme = "heyo"
 baseURL = "/"
 languageCode = "en"
@@ -36,6 +36,8 @@ paginate = 10
   customCss = []
   customJs = []
   displayMode = "dark"
+  # For Hugo's Open Graph
+  images = ['images/profile.png']
 
 # Sketch settings
 # you can also enable or disable it per page
@@ -47,7 +49,7 @@ paginate = 10
   # JSON that is passed to the sketch constructor
   # You can check all the possible configurations in
   startingConfig = """{
-    "kind": "chess",
+    "kind": "katakana",
     "nStreams": 10
   }"""
 
@@ -123,7 +125,7 @@ url = "/about/"
     unsafe = true
   [markup.tableOfContents]
     endLevel = 6
-    startLevel = 2
+    startLevel = 1
   [markup.highlight]
     anchorLineNos = false
     codeFences = true

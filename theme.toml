@@ -1,9 +1,9 @@
 # https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration
 
-name = "Heyo"
+name = "heyo"
 license = "MIT"
 licenselink = "https://github.com/LucasVadilho/heyo-hugo-theme/blob/master/LICENSE"
-description = "Heyo is a responsive, minimalist and pretty theme built for hugo, based on Alexander Bilz Anatole."
+description = "heyo is a responsive, minimalist and pretty theme built for hugo, based on Alexander Bilz Anatole."
 
 homepage = "https://github.com/LucasVadilho/heyo-hugo-theme"
 

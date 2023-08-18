@@ -5,6 +5,9 @@
     <!-- Hugo meta -->
     {{- hugo.Generator -}}
 
+    <!-- Hugo OpenGraph -->
+    {{ template "_internal/opengraph.html" . }}
+
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta name="description" content="{{ .Site.Params.description }}">
     
@@ -16,7 +19,7 @@
     {{ $anatole := resources.Get "js/heyo-header.js" }}
     {{ $secureJS := $anatole |  resources.Minify | resources.Fingerprint }}
     <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
-    
+
     <!-- Computer Modern Font -->
     {{ $fonts := resources.Get "css/fonts.css" | resources.Fingerprint }}
     <link rel="stylesheet" type="text/css" href="{{ $fonts.Permalink }}" integrity="{{ $fonts.Data.Integrity }}" crossorigin="anonymous">
@@ -26,29 +29,31 @@
     {{ $secureJS := $toc |  resources.Minify | resources.Fingerprint }}
     <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous"></script>
 
-    <!-- Sidebar sketch -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" defer></script>
+    {{ if not (isset .Params "showtoc") }}
+        <!-- Sidebar sketch -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" defer></script>
 
-    {{ $graph := resources.Get "js/sketch-graph.js" }}
-    {{ $secureJS := $graph | resources.Fingerprint }}
-    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        {{ $graph := resources.Get "js/sketch-graph.js" }}
+        {{ $secureJS := $graph | resources.Fingerprint }}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
 
-    {{ $dr := resources.Get "js/sketch-digitalRain.js" }}
-    {{ $secureJS := $dr | resources.Fingerprint }}
-    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        {{ $dr := resources.Get "js/sketch-digitalRain.js" }}
+        {{ $secureJS := $dr | resources.Fingerprint }}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
 
-    {{ $cbs := resources.Get "js/sketch-circleBrushStrokes.js" }}
-    {{ $secureJS := $cbs | resources.Fingerprint }}
-    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        {{ $cbs := resources.Get "js/sketch-circleBrushStrokes.js" }}
+        {{ $secureJS := $cbs | resources.Fingerprint }}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
 
-    {{ $meta := resources.Get "js/sketch-meta.js" }}
-    {{ $secureJS := $meta | resources.Fingerprint }}
-    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        {{ $meta := resources.Get "js/sketch-meta.js" }}
+        {{ $secureJS := $meta | resources.Fingerprint }}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
 
-    {{ $sketch := resources.Get "js/sidebar-sketch.js" }}
-    {{ $secureJS := $sketch |  resources.Minify | resources.Fingerprint }}
-    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
-
+        {{ $sketch := resources.Get "js/sidebar-sketch.js" }}
+        {{ $secureJS := $sketch |  resources.Minify | resources.Fingerprint }}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+    {{ end }}
+    
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{ .Site.Params.favicon | absURL }}favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.favicon | absURL }}apple-touch-icon.png">
