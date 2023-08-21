@@ -29,7 +29,7 @@ cd heyo/exampleSite && hugo server --themesDir ../..
 
 # Live preview
 
-You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioipio.com/). Also, scan the QR code to preview on mobile!
+You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioipio.com/). Also, scan the QR code if you want to preview on mobile!
 
 # Credits
 
