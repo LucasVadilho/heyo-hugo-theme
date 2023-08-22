@@ -31,6 +31,7 @@ cd heyo/exampleSite && hugo server --themesDir ../..
 
 You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioipio.com/). Also, scan the QR code if you want to preview on mobile!
 
-# Credits
+# Credits & thanks
 
-All the images in `exampleSite` were graciously provided by TD Vadilho, you should checkout his [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/@TDVadilho)!
+- All the images in `exampleSite` were graciously provided by TD Vadilho, you should checkout his [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/@TDVadilho)!
+- Thanks to Alex Bilz, for the original [Anatole](https://github.com/lxndrblz/anatole) and granting permission to share the modified theme!
