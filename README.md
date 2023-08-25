@@ -10,7 +10,7 @@ heyo is a responsive, minimalist, and pretty theme built for [hugo](https://gohu
 - [x] [Pretty visualizations](https://heyo-theme.oioipio.com/post/sketches/) in the sidebar
 - [x] [Table of Contents](https://heyo-theme.oioipio.com/post/sketches/post/toc/) in the sidebar
 - [x] [Callout shortcode](https://heyo-theme.oioipio.com/post/callouts/)
-- [x] [Badges shortcode](http://localhost:1313/post/badges/)
+- [x] [Badges shortcode](https://heyo-theme.oioipio.com/post/badges/)
 - [x] Dark theme
 - [x] Support for custom CSS and JS
 - [x] [Multilingual support](https://gohugo.io/content-management/multilingual/) (english and brazilian portuguese, for now)
