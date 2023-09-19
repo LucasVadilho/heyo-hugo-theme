@@ -35,6 +35,3 @@ You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioip
 
 - All the images in `exampleSite` were graciously provided by TD Vadilho, you should checkout his [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/@TDVadilho)!
 - Thanks to Alex Bilz, for the original [Anatole](https://github.com/lxndrblz/anatole)
-  - heyo has a very different style and design, most changes could't be added to Anatole without completely changing the original feel and appearance
-  - heyo has a few new shortcodes and settings
-  - Alex Bilz [Anatole](https://github.com/lxndrblz/anatole) is licenced under MIT, I also cleared with them if they think it's different enough
