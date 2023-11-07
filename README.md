@@ -15,7 +15,6 @@ heyo is a responsive, minimalist, and pretty theme built for [hugo](https://gohu
 - [x] Support for custom CSS and JS
 - [x] [Multilingual support](https://gohugo.io/content-management/multilingual/) (english and brazilian portuguese, for now)
 - [x] [Open Graph](https://gohugo.io/templates/internal/#configure-open-graph) support
-- [ ] Soon™
 
 # Quickstart
 
@@ -33,5 +32,5 @@ You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioip
 
 # Credits & thanks
 
-- All the images in `exampleSite` were graciously provided by TD Vadilho, you should checkout his [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/@TDVadilho)!
+- All the images in `exampleSite` were graciously provided by TD Vadilho, you can check his work on the [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/channel/UCu4GsGZTk3wqYWbYhfo3rzw)!
 - Thanks to Alex Bilz, for the original [Anatole](https://github.com/lxndrblz/anatole)
