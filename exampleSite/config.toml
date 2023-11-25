@@ -27,17 +27,22 @@ paginate = 10
     weight = 2
     LanguageName = "pt-br"
 
+[params.author]
+  name = "Jane Doe"
+  email = "jane@doe.com"
+
 [params]
   title = "I'm Jane Doe"
-  author = "Jane Doe"
   description = "Call me Jane"
   profilePicture = "images/profile.png"
   favicon = "favicons/"
   customCss = []
   customJs = []
   displayMode = "dark"
-  # For Hugo's Open Graph
   images = ['images/profile.png']
+
+[taxonomies]
+  series = 'series'
 
 # Sketch settings
 # you can also enable or disable it per page
