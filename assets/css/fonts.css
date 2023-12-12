@@ -29,3 +29,21 @@
     font-weight: bold;
     font-style: italic;
 }
+
+@font-face {
+    font-family: "FandolHei-Regular";
+    src: url("../fonts/FandolHei-Regular.otf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "FandolKai-Regular";
+    src: url("../fonts/FandolKai-Regular.otf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "FandolFang-Regular";
+    src: url("../fonts/FandolFang-Regular.ttf") format("opentype");
+    font-display: swap;
+}
