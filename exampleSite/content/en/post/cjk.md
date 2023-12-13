@@ -1,6 +1,6 @@
 ---
 author: Lucas David Vadilho
-title: CJK
+title: CJK Glyphs
 date: 2023-12-12
 description: 
 tags: 
@@ -10,20 +10,13 @@ categories:
     - heyo
 ---
 
-Test post for CJK characters.
+Test post for CJK Glyphs.
 
 <!--more-->
 
-# @luobo202254's example
+In a [GitHub issue](https://github.com/LucasVadilho/heyo-hugo-theme/issues/2), _@luobo202254_ raised that the browser's default font for Chinese characters didn't play well with `Computer Modern`. We tried some variations and chose `FandolKai-Regular` to be the default[^1] for {{< theme >}}, the font was obtained from [CTAN](https://ctan.org/tex-archive/fonts/fandol), and is under the GNU GPL license.
 
-| Font family | Example |
-| --- | --- |
-| `Computer Modern Serif` (as-is) | <p style="font-family: Computer Modern Serif">This is python manual, 这是python的帮助手册</p> |
-| `Computer Modern Serif, FandolHei-Regular` | <p style="font-family: 'Computer Modern Serif', 'FandolHei-Regular'">This is python manual, 这是python的帮助手册</p> |
-| `Computer Modern Serif, FandolKai-Regular` | <p style="font-family: 'Computer Modern Serif', 'FandolKai-Regular'">This is python manual, 这是python的帮助手册</p> |
-| `Computer Modern Serif, FandolFang-Regular` | <p style="font-family: 'Computer Modern Serif', 'FandolFang-Regular'">This is python manual, 这是python的帮助手册</p> |
-
-All the examples bellow were generated at https://generator.lorem-ipsum.info/. Using `Computer Modern Serif, FandolKai-Regular` for now.
+# Samples[^2]
 
 {{< callout 
     kind="note"
@@ -48,3 +41,22 @@ All the examples bellow were generated at https://generator.lorem-ipsum.info/. U
     icon="fas fa-language"
     color="#717788"
 >}}
+
+# Choose your own fonts
+
+In `config.toml`, under `[params]`, there's `customCss`, on that param you can point to a CSS file that will override the defaults.
+
+For example, let's say you have `customCSS = ['customCss/my-font-family.css']` in `config.toml` and you create a file at `exampleSite/static/customCss/my-font-family.css` with the following:
+
+```css
+* {
+    font-family: 'sans serif';
+}
+```
+
+Your site should look something like this now:
+
+![exampleSite with a sans serif font](/images/my-font-family.png)
+
+[^1]: Note that it's pretty easy to change the defaults, just follow [these](#choose-your-own-fonts) instructions.
+[^2]: All the samples text were generated at https://generator.lorem-ipsum.info.
