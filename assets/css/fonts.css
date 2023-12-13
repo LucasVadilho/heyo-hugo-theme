@@ -29,3 +29,9 @@
     font-weight: bold;
     font-style: italic;
 }
+
+@font-face {
+    font-family: "FandolKai-Regular";
+    src: url("../fonts/FandolKai-Regular.otf") format("opentype");
+    font-display: swap;
+}

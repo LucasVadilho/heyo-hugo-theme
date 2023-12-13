@@ -32,5 +32,8 @@ You can check a live preview at [heyo-theme.oioipio.com](http://heyo-theme.oioip
 
 # Credits & thanks
 
-- All the images in `exampleSite` were graciously provided by TD Vadilho, you can check his work on the [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/channel/UCu4GsGZTk3wqYWbYhfo3rzw)!
-- Thanks to Alex Bilz, for the original [Anatole](https://github.com/lxndrblz/anatole)
+- 🖼️ All the images in `exampleSite` were graciously provided by TD Vadilho, you can check his work on the [website](https://www.tdvadilho.com?utm_source=heyo) and [YouTube](https://www.youtube.com/channel/UCu4GsGZTk3wqYWbYhfo3rzw)!
+- 🔡 Fonts!
+  - Computer Modern from [CTAN](https://ctan.org/pkg/cm-unicode) (SIL Open Font License)
+  - FandolKai-Regular from [CTAN](https://ctan.org/tex-archive/fonts/fandol) (GNU General Public License)
+- 🍍 Thanks to Alex Bilz, for the original [Anatole](https://github.com/lxndrblz/anatole)
