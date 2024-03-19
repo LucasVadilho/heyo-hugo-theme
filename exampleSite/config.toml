@@ -1,5 +1,5 @@
 title = "heyo"
-theme = "heyo"
+theme = "heyo-hugo-theme"
 baseURL = "/"
 languageCode = "en"
 DefaultContentLanguage = "en"
@@ -38,11 +38,13 @@ paginate = 10
   favicon = "favicons/"
   customCss = []
   customJs = []
-  displayMode = "dark"
+  displayMode = "light"
   images = ['images/profile.png']
 
 [taxonomies]
   series = 'series'
+  categories = 'categories'
+  tags = 'tags'
 
 # Sketch settings
 # you can also enable or disable it per page
