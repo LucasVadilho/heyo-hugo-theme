@@ -52,7 +52,7 @@ paginate = 10
   enable = true 
   displayOptions = true
   # Graph, Digital Rain, or Circles
-  use = "Digital Rain"
+  use = "Boids"
   # JSON that is passed to the sketch constructor
   # You can check all the possible configurations in
   startingConfig = """{

@@ -33,6 +33,8 @@
         <!-- Sidebar sketch -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" defer></script>
 
+        {{/* TODO: make a folder with all sketches and loop over them to add */}}
+
         {{ $graph := resources.Get "js/sketch-graph.js" }}
         {{ $secureJS := $graph | resources.Fingerprint }}
         <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
@@ -43,6 +45,10 @@
 
         {{ $cbs := resources.Get "js/sketch-circleBrushStrokes.js" }}
         {{ $secureJS := $cbs | resources.Fingerprint }}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
+        {{ $boids := resources.Get "js/sketch-boids.js" }}
+        {{ $secureJS := $boids | resources.Fingerprint }}
         <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
 
         {{ $meta := resources.Get "js/sketch-meta.js" }}
