@@ -1,7 +1,10 @@
 const SKETCHES = {
     'Graph': Graph,
     'Digital Rain': DigitalRain,
-    'Circles': CirclesBrushStrokes
+    'Circles': CirclesBrushStrokes,
+    'Boids': Boids,
+    'VizQuadtree': VizQuadtree,
+    'Test': Test
 }
 
 class Meta {
@@ -41,6 +44,7 @@ class Meta {
         push();
 
         this.sketch = new SKETCHES[this.name](this.sketchOptions);
+        // this.sketch = new SKETCHES['VizQuadtree'](this.sketchOptions);
 
         this.sketch.setup();
 
