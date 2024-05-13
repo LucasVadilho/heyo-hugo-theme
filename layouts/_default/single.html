@@ -4,6 +4,14 @@
     <div class="thumbnail" style="box-shadow: var(--box-shadow); height: {{ .height }};">
         <img src={{ .src | absURL }} style="object-position: {{ .object_position }};" title={{ .alt | default "thumbnail" }} alt={{ .alt | default "thumbnail" }} loading="lazy">
     </div>
+    {{ else }}
+        {{ with .Resources.ByType "image" }}
+            {{ with .GetMatch (printf "**{%s}*" "feature,cover,thumbnail") }}
+    <div class="thumbnail" style="box-shadow: var(--box-shadow);">
+        <img src={{ .RelPermalink | absURL }} alt="thumbnail" title="thumbnail" loading="lazy">
+    </div>
+            {{ end }}
+        {{ end }}
     {{ end }}
     <div class="post-title">
         <h1>{{ .Title }}</h1>
