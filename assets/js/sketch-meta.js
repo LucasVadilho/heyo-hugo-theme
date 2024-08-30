@@ -4,7 +4,6 @@ const SKETCHES = {
     'Circles': CirclesBrushStrokes,
     'Boids': Boids,
     'VizQuadtree': VizQuadtree,
-    'Test': Test
 }
 
 class Meta {
@@ -44,8 +43,6 @@ class Meta {
         push();
 
         this.sketch = new SKETCHES[this.name](this.sketchOptions);
-        // this.sketch = new SKETCHES['VizQuadtree'](this.sketchOptions);
-
         this.sketch.setup();
 
         if(this.showHover) {
@@ -80,6 +77,8 @@ class Meta {
         w = width
     
         resizeCanvas(width, height);
+        
+        if(this.sketch && this.sketch.windowResized) this.sketch.windowResized();
     }
     
     toggleFullscreen() {
@@ -89,6 +88,9 @@ class Meta {
             this.windowResized();
 
             this.settingsDiv.position(0, this.container.getBoundingClientRect().y + 20);
+
+            // Unhide top menu, it has z-index
+            document.getElementsByClassName('page-top')[0].style.display = 'block';
 
             this.fullScreen = false;
         } else {
@@ -106,6 +108,9 @@ class Meta {
             
             this.settingsDiv.position(0, 20);
 
+            // Hide top menu, it has z-index
+            document.getElementsByClassName('page-top')[0].style.display = 'none';
+
             this.fullScreen = true;
         }
         
@@ -116,21 +121,25 @@ class Meta {
         this.sketch.draw();
 
         if(this.fpsDisplay) {
+            let fpsWidth = textWidth(this.fps);
+            
             push();
+                noStroke();
+                textAlign(LEFT);
+                textSize(16);
 
-            noStroke();
-            textAlign(LEFT);
-            textSize(16);
+                fill(theme.bg);
+                rect(5, 0, fpsWidth, 16);
 
-            let fpsWidth = textWidth(this.fps)
-            fill(theme.bg);
-            rect(5, 0, fpsWidth, 16);
-
-            fill(theme.body);
-            text(this.fps, 5, 16);
-
+                fill(theme.body);
+                text(this.fps, 5, 16);
             pop();
         }
+    }
+
+    saveState() {
+        this.sketch.saveState();
+        console.log(1);
     }
 
     updateTheme() {

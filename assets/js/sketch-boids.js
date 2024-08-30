@@ -10,60 +10,7 @@ const pointToLineSegment = (p, a, b) => {
     if(distanceInAB > 1) return [b, p.dist(b)];
 
     let closestPoint = a.copy().add(ab.mult(distanceInAB));
-    let distance = p.dist(closestPoint);
-
-    return [closestPoint, distance];
-}
-
-class Test {
-    constructor() {
-        
-    }
-
-    setup() {
-        this.p = createVector(random(width), random(height));
-        this.a = createVector(random(width), random(height));
-        this.b = createVector(random(width), random(height));
-    }
-
-    draw() {
-        if(frameCount % (60 * 10) == 0) {
-            this.p = createVector(random(width), random(height));
-            this.a = createVector(random(width), random(height));
-            this.b = createVector(random(width), random(height));
-        }
-
-        this.p = createVector(mouseX, mouseY);
-
-        background(theme.bg);
-        stroke(theme.a);
-
-        strokeWeight(5);
-        point(this.p.x, this.p.y);
-
-        strokeWeight(1);
-        line(this.a.x, this.a.y, this.b.x, this.b.y);
-
-        let [closestPoint, distance] = pointToLineSegment(this.p, this.a, this.b);
-        line(this.p.x, this.p.y, closestPoint.x, closestPoint.y);
-
-        noStroke();
-        fill('white');
-        text(distance, 100, 100);
-        text('P', this.p.x, this.p.y);
-        text('A', this.a.x, this.a.y);
-        text('B', this.b.x, this.b.y);
-    }
-
-    updateTheme() {}
-    
-    mouseClicked(e) {
-    }
-
-    mouseWheel(e) {
-    }
-
-    getSettings() {}
+    return [closestPoint, p.dist(closestPoint)];
 }
 
 class AABB {
@@ -106,14 +53,8 @@ class AABB {
 
     intersectsCircle(circle) {
         // Center is inside AABB
-        if(this.contains(circle)) {
-            // push();
-            //     stroke('green');
-            //     strokeWeight(5);
-            //     point(this.center.x, this.center.y);
-            // pop();
+        if(this.contains(circle))
             return true;
-        }
 
         // Vertices of AABB
         let a = this.position;                                                      // Top left
@@ -128,22 +69,6 @@ class AABB {
         let [closestRight, distanceRight] = pointToLineSegment(circle.position, d, b);
 
         let minDistance = min(distanceTop, distanceLeft, distanceBottom, distanceRight);
-
-        // push();
-        //     stroke('green');
-        //     strokeWeight(1);
-            
-        //     line(circle.position.x, circle.position.y, closestTop.x, closestTop.y);
-        //     line(circle.position.x, circle.position.y, closestLeft.x, closestLeft.y);
-        //     line(circle.position.x, circle.position.y, closestBottom.x, closestBottom.y);
-        //     line(circle.position.x, circle.position.y, closestRight.x, closestRight.y);
-
-        //     strokeWeight(10);
-        //     point(closestTop.x, closestTop.y);
-        //     point(closestLeft.x, closestLeft.y);
-        //     point(closestBottom.x, closestBottom.y);
-        //     point(closestRight.x, closestRight.y);
-        // pop();
 
         // Check if min distance is smaller than the radius
         return minDistance < circle.r;
@@ -225,13 +150,14 @@ class Circle {
     }
 }
 
-class QuadTree {
+class Quadtree {
     constructor(aabb, capacity) {
         this.aabb = aabb;
         this.capacity = capacity;
         this.subdivided = false;
 
         this.objs = [];
+
     }
 
     insert(obj) {
@@ -265,10 +191,10 @@ class QuadTree {
         let newWidth = width / 2;
         let newHeight = height / 2;
 
-        this.topLeft = new QuadTree(new AABB(createVector(x, y), newWidth, newHeight), this.capacity);
-        this.bottomLeft = new QuadTree(new AABB(createVector(x, y + newHeight), newWidth, newHeight), this.capacity);
-        this.topRight = new QuadTree(new AABB(createVector(x + newWidth, y), newWidth, newHeight), this.capacity);
-        this.bottomRight = new QuadTree(new AABB(createVector(x + newWidth, y + newHeight), newWidth, newHeight), this.capacity);
+        this.topLeft = new Quadtree(new AABB(createVector(x, y), newWidth, newHeight), this.capacity);
+        this.bottomLeft = new Quadtree(new AABB(createVector(x, y + newHeight), newWidth, newHeight), this.capacity);
+        this.topRight = new Quadtree(new AABB(createVector(x + newWidth, y), newWidth, newHeight), this.capacity);
+        this.bottomRight = new Quadtree(new AABB(createVector(x + newWidth, y + newHeight), newWidth, newHeight), this.capacity);
 
         this.subdivided = true;
     }
@@ -314,7 +240,13 @@ class QuadTree {
     }
     
     draw() {
+        if(!Quadtree.QT_DRAW) {
+            console.log('Set Quadtree.QT_DRAW');
+            return;
+        }
+
         let {x, y, width, height} = this.aabb.getAABB();
+        let QT_DRAW = Quadtree.QT_DRAW;
 
         QT_DRAW.mask.draw();
 
@@ -353,59 +285,10 @@ class QuadTree {
         }
     }
 
-    adraw(circle) {
-        let {x, y, width, height} = this.aabb.getAABB();
-        // text(`${this.aabb.center.x}, ${this.aabb.center.y}`, this.aabb.center.x, this.aabb.center.y)
-
-        if(this.aabb.intersectsCircle(circle)) {
-            // push();
-            // stroke(255);
-            // strokeWeight(5);
-            // point(this.aabb.center.x, this.aabb.center.y);
-            // pop();
-
-            stroke(theme.a);
-            rect(x, y, width, height);
-        } else { 
-            // stroke(theme.a._getRed(), theme.a._getGreen(), theme.a._getBlue(), 50);
-            // rect(x, y, width, height);
-        }
-
-        noFill();
-        // fill(33, 255);
-
-
-        // push();
-        //     strokeWeight(5);
-        //     point(x, y);
-        //     point(x, y + height);
-        //     point(x + width, y);
-        //     point(x + width, y + height);
-        // pop();
-
-        for(let obj of this.objs) {
-            push();
-            strokeWeight(5);
-            if(circle.contains(obj)){
-                stroke(theme.a);
-            } else {
-                stroke(255);
-            }
-            point(obj.position.x, obj.position.y);
-            pop();
-        }
-
-        if(this.subdivided) {
-            this.topLeft.adraw(circle);
-            this.topRight.adraw(circle);
-            this.bottomLeft.adraw(circle);
-            this.bottomRight.adraw(circle);
-        }
-    }
-
-    reset() {
+    reset(capacity) {
         this.objs = [];
         this.subdivided = false;
+        this.capacity = capacity || this.capacity;
 
         this.topLeft = undefined;
         this.topRight = undefined;
@@ -413,85 +296,97 @@ class QuadTree {
         this.bottomRight = undefined;
     }
 
-    traverse() {
-        console.log(this.objs);
+    setDrawOptions(drawOptions) {
+        this.drawOptions = {...this.drawOptions, ...drawOptions};
 
         if(this.subdivided) {
-            console.log('Top right');
-            this.topRight.traverse();
-           
-            console.log('Top left');
-            this.topLeft.traverse();
-           
-            console.log('Bottom right');
-            this.bottomRight.traverse();
-           
-            console.log('Bottom Left');
-            this.bottomLeft.traverse();
+            this.topLeft.setDrawOptions(drawOptions);
+            this.topRight.setDrawOptions(drawOptions);
+            this.bottomLeft.setDrawOptions(drawOptions);
+            this.bottomRight.setDrawOptions(drawOptions);
         }
     }
 }
 
-var aabb;
-var qt;
-var objs = [];
-
-let region;
-let QT_DRAW;
-
 class Boid {
-    static SIZE_MULTIPLIER = 30;
+    // Simulation parameters
+    static PERCEPTION_RANGE = 20;
+    static SEPARATION_COEF = 0.0018;
+    static ALIGNMENT_COEF = 0.1136;
+    static COHESION_COEF = 0.0022;
+    static MIN_SPEED = 1.5;
+    static MAX_SPEED = 4;
 
-    constructor(position, velocity, acceleration, range) {
+    static AVOID_EDGES = true;
+    static EDGE_MARGIN = 90;
+    static EDGE_SPEED = 0.1;
+
+    // Visual parameters
+    static SIZE_MULTIPLIER = 7;
+    static STROKE = 'black';
+    static FILL = 'white';
+    static DEBUG_LINES = false;
+
+    constructor({
+        position, velocity, acceleration, 
+        separation, alignment, cohesion,
+        margin} = {}) {
         this.position = position || createVector(random(width), random(height));
-        this.velocity = velocity || createVector(random(5), random(5));
-        this.acceleration = acceleration || createVector(5, -3);
+        this.velocity = velocity || createVector(random(-5, 5), random(-5, 5));
+        this.acceleration = acceleration || createVector(0, 0);
 
-        this.range = range || 100;
+        this.separation = separation || createVector(0, 0);
+        this.alignment = alignment || createVector(0, 0);
+        this.cohesion = cohesion || createVector(0, 0);
+
+        this.margin = margin || createVector(0, 0);
     }
 
-    separation() {
+    update(neighbors) {
+        this.separation.set(0, 0);
+        this.alignment.set(0, 0);
+        this.cohesion.set(0, 0);
+        this.margin.set(0, 0);
 
-    }
+        for(let neighbor of neighbors) {
+            this.separation.add(this.position.copy().sub(neighbor.position));
+            this.alignment.add(neighbor.velocity);
+            this.cohesion.add(neighbor.position);
+        }
 
-    alignment() {
-
-    }
-
-    cohesion () {
-
-    }
-
-    flee() {
-
-    }
-
-    update(neighborhood) {
-        this.acceleration = createVector(width/2, height/2).sub(this.position);
+        this.separation.mult(Boid.SEPARATION_COEF);
+        if(neighbors.length > 0) {
+            this.alignment.div(neighbors.length).sub(this.velocity).mult(Boid.ALIGNMENT_COEF);
+            this.cohesion.div(neighbors.length).sub(this.position).mult(Boid.COHESION_COEF);
+        }
         
-        // push();
-        // strokeWeight(5);
-        // stroke('red');
-        // point(this.acceleration.x, this.acceleration.y);
-        // console.log(this.acceleration);
-        // pop();
-        // let a = this.position.copy().sub(this.acceleration);
-        // line(this.position.x, this.position.y, a.x, a.y);
-        // noLoop();
+        if(Boid.AVOID_EDGES) {
+            if(this.position.x > width - Boid.EDGE_MARGIN) this.margin.set(-Boid.EDGE_SPEED, 0);
+            else if(this.position.x < Boid.EDGE_MARGIN) this.margin.set(Boid.EDGE_SPEED, 0);
+            
+            if(this.position.y > height - Boid.EDGE_MARGIN) this.margin.set(0, -Boid.EDGE_SPEED);
+            else if(this.position.y < Boid.EDGE_MARGIN) this.margin.set(0, Boid.EDGE_SPEED);
+        } else {
+            if(this.position.x > width) this.position.x = 0;
+            else if(this.position.x < 0) this.position.x = width;
+            
+            if(this.position.y > height) this.position.y = 0;
+            else if(this.position.y < 0) this.position.y = height;
+        }
 
-        // line(this.position.x, this.position.y, this.acceleration.x, this.acceleration.y);
+        this.velocity
+            .add(this.separation)
+            .add(this.alignment)
+            .add(this.cohesion)
+            .add(this.margin);
+        
+        let speed = this.velocity.mag();
+        if(speed > Boid.MAX_SPEED)
+            this.velocity.normalize().mult(Boid.MAX_SPEED);
+        else if(speed < Boid.MIN_SPEED)
+            this.velocity.normalize().mult(Boid.MIN_SPEED);
+
         this.position.add(this.velocity);
-        this.velocity.add(this.acceleration.normalize());
-        // console.log(this.velocity.x, this.velocity.y);
-
-        this.checkBounds();
-    }
-
-    checkBounds() {
-        if(this.position.x > width) this.position.x = 0;
-        if(this.position.x < 0) this.position.x = width;
-        if(this.position.y > height) this.position.y = 0;
-        if(this.position.y < 0) this.position.y = height;
     }
 
     getTrianglePoints() {
@@ -501,224 +396,458 @@ class Boid {
 
         // https://mackiemathew.wordpress.com/2014/03/01/finding-a-normal-perpendicular-vector-on-a-2d-plane/
         // (u, v) -> (-v, u) and (v, -u)
-        let up = this.position.copy().add(createVector(-normalizedVelocity.y, normalizedVelocity.x).mult(Boid.SIZE_MULTIPLIER / 2));
-        let down = this.position.copy().add(createVector(normalizedVelocity.y, -normalizedVelocity.x).mult(Boid.SIZE_MULTIPLIER / 2));
+        let up = this.position.copy()
+            .add(createVector(-normalizedVelocity.y, normalizedVelocity.x)
+            .mult(Boid.SIZE_MULTIPLIER / 4));
+        let down = this.position.copy()
+            .add(createVector(normalizedVelocity.y, -normalizedVelocity.x)
+            .mult(Boid.SIZE_MULTIPLIER / 4));
         
         return [tip, up, down];
     }
 
-    draw(debug = true) {
+    draw() {
         push();
-            stroke(theme.a);
-            fill(255);
+            if(Boid.DEBUG_LINES || this.showDebugLines) {
+                noFill();
+                
+                stroke(theme.a);
+                circle(this.position.x, this.position.y, 2 * Boid.PERCEPTION_RANGE);
 
-            if(debug) {
+                push();
+                    translate(this.position.x, this.position.y)
 
+                    stroke(theme.a);
+                    let velocityFactor = map(this.velocity.mag(), 0, Boid.MAX_SPEED, 0, Boid.PERCEPTION_RANGE);
+                    let velocity = this.velocity.copy().normalize().mult(velocityFactor);
+                    line(0, 0, velocity.x, velocity.y);
+
+                    stroke('red');
+                    let separationFactor = map(this.velocity.mag(), 0, Boid.MAX_SPEED, 0, Boid.PERCEPTION_RANGE);
+                    let separation = this.separation.copy().normalize().mult(separationFactor);
+                    line(0, 0, separation.x, separation.y);
+
+                    stroke('green');
+                    let alignment = this.alignment.copy().normalize().mult(Boid.PERCEPTION_RANGE);
+                    line(0, 0, alignment.x, alignment.y);
+
+                    stroke('pink');
+                    let cohesion = this.cohesion.copy().normalize().mult(Boid.PERCEPTION_RANGE);
+                    line(0, 0, cohesion.x, cohesion.y);
+                pop();
             }
+
+            fill(this.fillColor || Boid.FILL);
+            stroke(this.strokeColor || Boid.STROKE);
+            
             let [tip, left, right] = this.getTrianglePoints();
 
             triangle(tip.x, tip.y, left.x, left.y, right.x, right.y);
+            // quad(tip.x, tip.y, left.x, left.y, this.position.x, this.position.y-10, right.x, right.y);
         pop();
+    }
+
+    exportBoid() {
+        return {
+            'position': [this.position.x, this.position.y],
+            'velocity': [this.velocity.x, this.velocity.y],
+            'acceleration': [this.acceleration.x, this.acceleration.y],
+            'separation': [this.separation.x, this.separation.y],
+            'alignment': [this.alignment.x, this.alignment.y],
+            'cohesion': [this.cohesion.x, this.cohesion.y],
+            'margin': [this.margin.x, this.margin.y]
+        }
+    }
+
+    static loadBoid(boid) {
+        return new Boid({
+            'position': createVector(boid.position[0], boid.position[1]),
+            'velocity': createVector(boid.velocity[0], boid.velocity[1]),
+            'acceleration': createVector(boid.acceleration[0], boid.acceleration[1]),
+            'separation': createVector(boid.separation[0], boid.separation[1]),
+            'alignment': createVector(boid.alignment[0], boid.alignment[1]),
+            'cohesion': createVector(boid.cohesion[0], boid.cohesion[1]),
+            'margin': createVector(boid.margin[0], boid.margin[1])
+        });
     }
 }
 
 class Boids {
-    constructor() {
-        this.boids = [];
-    }
+    static SHOW_QUADTREE = false;
+    static SHOW_EDGE = false;
+
+    constructor() {}
 
     setup() {
-        for(let i = 0; i < 1; i++) {
-            this.boids.push(new Boid());
-        }
-    }
-
-    draw() {
-        background(theme.bg);
-        stroke(theme.a);
-        fill('white');
-
-        strokeWeight(1);
-
-        for(let boid of this.boids) {
-            boid.update();
-            boid.draw();
-        }
-
-        // // let rect = sketch.container.getBoundingClientRect();
-        // let velocity = createVector(mouseX, mouseY);
-        // let position = createVector(width / 2, height / 2);
+        this.boids = this.loadBoids();
         
-        // line(position.x, position.y, position.x + velocity.x, position.y + velocity.y);
-
-        // strokeWeight(5);
-        // point(position.x, -position.y);
-
-        // let normalizedVelocity = velocity.normalize();
-
-        // let tip = position.copy().add(normalizedVelocity.copy().mult(Boid.SIZE_MULTIPLIER));
-
-        // // https://mackiemathew.wordpress.com/2014/03/01/finding-a-normal-perpendicular-vector-on-a-2d-plane/
-        // // (u, v) -> (-v, u) and (v, -u)
-        // let up = position.copy().add(createVector(-normalizedVelocity.y, normalizedVelocity.x).mult(Boid.SIZE_MULTIPLIER / 2));
-        // let down = position.copy().add(createVector(normalizedVelocity.y, -normalizedVelocity.x).mult(Boid.SIZE_MULTIPLIER / 2));
-
-        // // console.log(normalizedVelocity);
-        // // console.log(createVector(-normalizedVelocity.y, normalizedVelocity.x), createVector(-normalizedVelocity.y, normalizedVelocity.x).normalize());
-    
-        // // point(tip.x, tip.y);
-        // // point(up.x, up.y);
-        // // point(down.x, down.y);
-
-        // triangle(tip.x, tip.y, up.x, up.y, down.x, down.y);
-
-        // // console.log('point:', position)
-        // // console.log('tip:', tip);
-        // // console.log('up:', up);
-        // // console.log('down:', down);
-        
-        // // triangle(0, 0, 0, height, width, height);
-        // // for(let boid of this.boids) {
-        // //     boid.draw();
-        // // }
-    }
-
-    getSettings() {}
-}
-
-class VizQuadtree {
-    constructor() {
-        aabb = new AABB(createVector(0, 0), width, height);
-        qt = new QuadTree(aabb, 5);
-        // region = new AABB(createVector(random(width), random(height)), random(width), random(height));
-        region = new Circle(createVector(1, 100), 200);
-
-        for(let i = 0; i < 1000; i++) {
-            objs[i] = {
-                'position': createVector(0, 0),
-                'noiseOffset': random(100000)
-            }
+        if(this.boids.length > 0) {
+            console.log(121);
+            this.nBoids = this.boids.length;
         }
+        else{
+            this.nBoids = 200;
+            this.boids = this.clusterStart();
+        }
+        this.aabb = new AABB(createVector(0, 0), width, height);
+        this.qt = new Quadtree(this.aabb, this.getQtCapacity(this.nBoids));
+        console.log(this.boids);
+        // // random start
+        // for(let i = 0; i < this.nBoids; i++)
+        //     this.boids.push(new Boid());
 
-        // for(let obj of objs) {
-        //     obj.x = width * noise(.001 * frameCount + obj.noiseOffset);
-        //     obj.y = height * noise(.001 * frameCount + obj.noiseOffset + 3104134);
-        // }
+        // interval start
+        // let i = 0;
+        // let intervalId = setInterval(() => {
+        //     this.boids.push(new Boid());
+        //     if(++i == this.nBoids) {
+        //         window.clearInterval(intervalId);
+        //         console.log('done')
+        //     }
+        // }, 100);
 
-        stroke(255);
-    }
+        // cluster start
+        // this.boids = this.clusterStart();
 
-    setup() {
-        QT_DRAW = {
+        Quadtree.QT_DRAW = {
             'structureStroke': theme.a,
             'structureStrokeWeight': 1,
             'structureFill': color(0, 0),
-            'showObjs': true,
+            'showObjs': false,
             'objStroke': color('white'),
             'objStrokeWeight': 2,
             'objFill': color(0, 0),
-            'mask': region
+            'mask': new AABB(createVector(-10, -10), width + 20, height + 20)
         }
 
-        // for(let i = 0; i < 10; i++) {
-        //     objs[i] = new Boid(
-        //         createVector(100 + 10 * i, 100),
-        //         createVector(0, 0),
-        //         createVector(0, 0),
-        //         200
-        //     );
-        // }
+        this.updateTheme();
+    }
+
+    clusterStart() {
+        let nClusters = 3;
+        let sizeFactor = 2;
+
+        // let clusters = [
+        //     {
+        //         'minX': 0, 'maxX': this.nBoids / nClusters * sizeFactor,
+        //         'minY': 100, 'maxY': 100 + this.nBoids / nClusters * sizeFactor,
+        //         'avgVelocity': createVector(1, 0),
+        //         'color': color('red')
+        //     }, {
+        //         'minX': 50, 'maxX': 50 + this.nBoids / nClusters * sizeFactor,
+        //         'minY': 400, 'maxY': 400 + this.nBoids / nClusters * sizeFactor,
+        //         'avgVelocity': createVector(-1, 1),
+        //         'color': color('green')
+        //     }, {
+        //         'minX': -300, 'maxX': -300 + this.nBoids / nClusters * sizeFactor,
+        //         'minY': height / 2, 'maxY': height / 2 + this.nBoids / nClusters * sizeFactor,
+        //         'avgVelocity': createVector(2, 0),
+        //         'color': color('blue')
+        //     }
+        // ];
+
+        // Corners
+        let clusters = [
+            {
+                'minX': width + 100, 'maxX': width + 100 ,//+ this.nBoids / nClusters * sizeFactor,
+                'minY': -100, 'maxY': -100 + this.nBoids / nClusters * sizeFactor,
+                'avgVelocity': createVector(1, 0).rotate(PI + Math.atan(width / height)),
+                'color': color('red')
+            }, 
+            {
+                'minX': width + 100, 'maxX': width + 100 ,//+ this.nBoids / nClusters * sizeFactor,
+                'minY': height + 100, 'maxY': height + 100 + this.nBoids / nClusters * sizeFactor,
+                'avgVelocity': createVector(1, 0).rotate(PI + Math.atan(height / width)),
+                'color': color('green')
+            }, 
+
+            //     'minX': 50, 'maxX': 50 + this.nBoids / nClusters * sizeFactor,
+            //     'minY': 400, 'maxY': 400 + this.nBoids / nClusters * sizeFactor,
+            //     'avgVelocity': createVector(-1, 1),
+            //     'color': color('green')
+            // }, {
+            //     'minX': -300, 'maxX': -300 + this.nBoids / nClusters * sizeFactor,
+            //     'minY': height / 2, 'maxY': height / 2 + this.nBoids / nClusters * sizeFactor,
+            //     'avgVelocity': createVector(2, 0),
+            //     'color': color('blue')
+            // }
+        ];
+        // Boid.AVOID_EDGES = false;
+        let boids = [];
+
+        for(let i = 0; i < this.nBoids; i++) {
+            let cluster = clusters[floor(random(clusters.length))];
+            
+            let position = createVector(
+                random(cluster.minX, cluster.maxX),
+                random(cluster.minY, cluster.maxY))
+
+            let velocity = cluster.avgVelocity.copy()
+                .rotate(random(-PI / 5, PI / 5))
+                .mult(random(10))
+                
+            boids.push(new Boid({
+                position: position,
+                velocity: velocity
+            }));
+
+            // boids[i].fillColor = cluster.color;
+            // boids[i].strokeColor = cluster.color;
+        }
+
+        return boids;
     }
 
     draw() {
-        qt.reset();
-        region.position = createVector(mouseX, mouseY);
-
         background(theme.bg);
 
-        // console.log('in region:', qt.queryCircle(region));
+        this.qt.reset(this.getQtCapacity(this.boids.length));
+        for(let boid of this.boids)
+            this.qt.insert(boid);
 
-        // for(let boid of objs) {
-        //     let neighborhood = new Circle(boid.position, boid.range);
-        //     let neighbors = qt.queryCircle(neighborhood);
+        for(let boid of this.boids) {
+            let neighborhood = new Circle(boid.position, Boid.PERCEPTION_RANGE);
+            let neighbors = this.qt.queryCircle(neighborhood);
 
-        //     boid.update(neighbors);
-        //     boid.draw();
-        // }
-    
-        for(let obj of objs) {
-            obj.position.x = width * noise(.001 * frameCount + obj.noiseOffset);
-            obj.position.y = height * noise(.001 * frameCount + obj.noiseOffset + 3104134);
-
-            qt.insert(obj);
+            boid.update(neighbors);
+            boid.draw();
         }
 
-        // qt.adraw(region);
-        qt.draw();
-        region.draw();
+        if(Boids.SHOW_QUADTREE)
+            this.qt.draw();
 
-        // if(frameCount > 1) noLoop();
+        if(Boids.SHOW_EDGE) {
+            push();
+                drawingContext.setLineDash([7, 4, 3]);
+                noFill();
+                stroke(120, 180);
+                rect(Boid.EDGE_MARGIN, Boid.EDGE_MARGIN, width - 2 * Boid.EDGE_MARGIN, height - 2 * Boid.EDGE_MARGIN);
+                drawingContext.setLineDash([]);
+            pop();
+        }
+        // noLoop();
     }
 
-    // draw() {
-    //     background(theme.bg);
+    getQtCapacity(n) {
+        return n < 200 ? 3 : Math.floor(25 / (1 + (25 * Math.pow(Math.E, -.009 * n))));
+    }
 
-    //     qt.reset(); //= new QuadTree(aabb, 1);
+    saveState() {
+        let boids = Array.from(this.boids, boid => boid.exportBoid());
 
-    //     region.position = createVector(mouseX, mouseY);
+        window.localStorage.setItem('sketch-boids', JSON.stringify(boids));
+    }
 
+    loadBoids() {
+        let rawBoids = JSON.parse(window.localStorage.getItem('sketch-boids'));
 
-    //     for(let obj of objs) {
-    //         obj.x = width * noise(.001 * frameCount + obj.noiseOffset);
-    //         obj.y = height * noise(.001 * frameCount + obj.noiseOffset + 3104134);
+        if(rawBoids) {
+            console.log('boids found');
+            console.log(rawBoids);
+            let  a = Array.from(rawBoids, raw => Boid.loadBoid(raw));
 
-    //         // push();
-    //         // strokeWeight(5);
-    //         // let a = region.contains(obj);
-    //         // // console.log(obj, a);
-    //         // if(a) {
-    //         //     stroke('blue');
-    //         // } else {
-    //         //     stroke('red');
-    //         // }
+            return a;
+        } else {
+            console.log('no boids found');
+            return [];
+        }
+    }
 
-    //         // circle(obj.x, obj.y, 5);
-    //         // pop();
+    windowResized() {
+        this.aabb = new AABB(createVector(0, 0), width, height);
+        this.qt = new Quadtree(this.aabb, this.getQtCapacity(this.nBoids));
 
-    //         qt.insert(obj);
-    //     }
-
-    //     qt.draw();
-    //     // region.draw();
-
-    //     // let ey = qt.queryAABB(region);
-    //     // let ey = qt.queryCircle(region);
-    //     // console.log(ey);
-    //     // for(let obj of ey) {
-    //     //     push();
-    //     //     strokeWeight(5);
-    //     //     stroke('blue');
-    //     //     point(obj.x, obj.y);
-    //     //     pop();
-    //     // }
-    // }
-
-    updateTheme() {}
-    
-    mouseClicked(e) {
-        // let rect = sketch.container.getBoundingClientRect();
-
-        // let inX = e.clientX > rect.left && e.clientX < rect.right;
-        // let inY = e.clientY > rect.top && e.clientY < rect.bottom;
-
-        // let obj = createVector(e.clientX - rect.left, e.clientY - rect.top);
-        // objs.push(obj);
-        // if(inX && inY) qt.insert(obj);
+        Quadtree.QT_DRAW.mask = new AABB(createVector(-10, -10), width + 20, height + 20);
     }
 
     mouseWheel(e) {
+        if(e.deltaY > 0) this.boids.push(new Boid());
+    }
+
+    mouseClicked(e) {
+        let region = new Circle(createVector(mouseX, mouseY), 20);
+        
+        for(let boid of this.boids) {
+            if(region.contains(boid)) boid.showDebugLines = true;    
+            else boid.showDebugLines = false;
+        }
+    }
+
+    updateTheme() {
+        if(theme.name == 'light') {
+            Boid.FILL = color('black');
+            Boid.STROKE = color('white');
+        } else {
+            Boid.FILL = color('white');
+            Boid.STROKE = theme.a;
+        }
+    }
+
+    getSettings() {
+        // Simulation parameters
+        let separationCoefficient = createSlider(0, 0.01, Boid.SEPARATION_COEF, .0001);
+        separationCoefficient.input(() => Boid.SEPARATION_COEF = separationCoefficient.value());
+
+        let alignmentCoefficient = createSlider(0, 0.5, Boid.ALIGNMENT_COEF, .0001);
+        alignmentCoefficient.input(() => Boid.ALIGNMENT_COEF = alignmentCoefficient.value());
+
+        let cohesionCoefficient = createSlider(0, 0.01, Boid.COHESION_COEF, .0001);
+        cohesionCoefficient.input(() => Boid.COHESION_COEF = cohesionCoefficient.value());
+
+        let boidSize = createSlider(1, 40, Boid.SIZE_MULTIPLIER, 1);
+        boidSize.input(() => Boid.SIZE_MULTIPLIER = boidSize.value());
+
+        let percepitionRange = createSlider(0, 200, Boid.PERCEPTION_RANGE, 1);
+        percepitionRange.input(() => Boid.PERCEPTION_RANGE = percepitionRange.value());
+
+        let minSpeed = createSlider(0, 10, Boid.MIN_SPEED, 0.1);
+        minSpeed.input(() => Boid.MIN_SPEED = minSpeed.value());
+
+        let maxSpeed = createSlider(0, 10, Boid.MAX_SPEED, 0.1);
+        maxSpeed.input(() => Boid.MAX_SPEED = maxSpeed.value());
+
+        let edgeSpeed = createSlider(0, 3, Boid.EDGE_SPEED, 0.01);
+        edgeSpeed.input(() => Boid.EDGE_SPEED = edgeSpeed.value());
+
+        let edgeMargin = createSlider(-200, 500, Boid.EDGE_MARGIN, 1);
+        edgeMargin.input(() => Boid.EDGE_MARGIN = edgeMargin.value());
+
+        let boids = createSlider(0, 1500, Boids.nBoids, 1);
+        boids.input(() => {
+            if(boids.value() < this.nBoids)
+                this.boids.splice(0, this.nBoids - boids.value());
+            else if(boids.value() > this.nBoids)
+                for(let i = this.nBoids; i < boids.value(); i++) 
+                    this.boids.push(new Boid());
+
+            this.nBoids = this.boids.length;
+        });
+
+        // Draw
+        let showQuadtree = createCheckbox('', false);
+        showQuadtree.changed(() => Boids.SHOW_QUADTREE = showQuadtree.checked());
+
+        let boidDebugLines = createCheckbox('', Boid.DEBUG_LINES);
+        boidDebugLines.changed(() => Boid.DEBUG_LINES = boidDebugLines.checked());
+
+        let showEdge = createCheckbox('', Boids.SHOW_EDGE);
+        showEdge.changed(() => Boids.SHOW_EDGE = showEdge.checked());
+
+        return {
+            'Separation': separationCoefficient,
+            'Alignment': alignmentCoefficient,
+            'Cohesion': cohesionCoefficient,
+            'Perception Range': percepitionRange,
+            'Boid Size': boidSize,
+            'Min Speed': minSpeed,
+            'Max Speed': maxSpeed,
+            'Edge Speed': edgeSpeed,
+            'Edge Margin': edgeMargin,
+            '# Boids': boids,
+            'Show Boid Debug': boidDebugLines,
+            'Show Edge': showEdge,
+            'Show Quadtree': showQuadtree
+        }
+    }
+}
+
+class VizQuadtree {
+    constructor() {}
+
+    setup() {
+        this.aabb = new AABB(createVector(0, 0), width, height);
+        this.qt = new Quadtree(this.aabb, 3);
+        this.region = new Circle(createVector(1, 100), 200);
+        this.objs = [];
+
+        this.clusters = [
+            {
+                'minX': width/5, 'maxX': width/2,
+                'minY': 100, 'maxY': height/3,
+            },
+            {
+                'minX': 3/4*width, 'maxX': width,
+                'minY': height/5, 'maxY': 1/2*height,
+            },
+            {
+                'minX': (width-100)/2, 'maxX': (width+100)/2,
+                'minY': 3/4*height, 'maxY': height,
+            },
+            {
+                'minX': (width-150)/2, 'maxX': (width+150)/2,
+                'minY': (height-150)/2, 'maxY': (height+150)/2,
+            },
+        ]
+
+        for(let i = 0; i < 1500; i++) {
+            this.objs[i] = {
+                'position': createVector(0, 0),
+                'noiseOffset': random(100000),
+                'cluster': floor(random(this.clusters.length))
+            }
+        }
+
+        this.updateTheme();
+    }
+
+    draw() {
+        background(theme.bg);
+
+        this.qt.reset();
+        this.region.position = createVector(mouseX, mouseY);
+
+        for(let obj of this.objs) {
+            // obj.position.x = width * noise(.001 * frameCount + obj.noiseOffset);
+            // obj.position.y = height * noise(.001 * frameCount + obj.noiseOffset + 3104134);
+
+            let noiseX = noise(.002 * frameCount + obj.noiseOffset);
+            let noiseY = noise(.002 * frameCount + obj.noiseOffset + 3104134);
+
+            let cluster = this.clusters[obj.cluster];
+
+            obj.position = createVector(
+                map(noiseX, 0, 1, cluster.minX - 65, cluster.maxX + 65),
+                map(noiseY, 0, 1, cluster.minY - 65, cluster.maxY + 65)
+            );
+            
+            this.qt.insert(obj);
+        }
+
+        this.qt.draw();
+        this.region.draw();
+    }
+
+    updateTheme() {
+        if(theme.name == 'light') {
+            Quadtree.QT_DRAW = {
+                'structureStroke': theme.a,
+                'structureStrokeWeight': 1,
+                'structureFill': color(0, 0),
+                'showObjs': true,
+                'objStroke': color('black'),
+                'objStrokeWeight': 2,
+                'objFill': color(0, 0),
+                'mask': this.region
+            }
+        } else {
+            Quadtree.QT_DRAW = {
+                'structureStroke': theme.a,
+                'structureStrokeWeight': 1,
+                'structureFill': color(0, 0),
+                'showObjs': true,
+                'objStroke': color('white'),
+                'objStrokeWeight': 2,
+                'objFill': color(0, 0),
+                'mask': this.region
+            }
+        }
+    }
+    
+    mouseClicked(e) {}
+
+    mouseWheel(e) {
         e.preventDefault();
-        region.r += e.deltaY / 10;
+        this.region.r += e.deltaY / 10;
     }
 
     getSettings() {}

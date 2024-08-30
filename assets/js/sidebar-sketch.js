@@ -46,25 +46,46 @@ function updateTheme() {
 }
 
 function windowResized() {
-    if (windowWidth <= 950) {
-        noLoop();
-        return;
-    } else {
-        loop();
-    }
-
-    let container = document.getElementById('sidebar-sketch');
-    let { width, height } = container.getBoundingClientRect();
-
-    h = height
-    w = width
-
-    resizeCanvas(width, height);
+    sketch.windowResized();
 }
 
+// function windowResized() {
+//     if (windowWidth <= 950) {
+//         noLoop();
+//         return;
+//     } else {
+//         loop();
+//     }
+
+//     let container = document.getElementById('sidebar-sketch');
+//     let { width, height } = container.getBoundingClientRect();
+
+//     h = height
+//     w = width
+
+//     resizeCanvas(width, height);
+// }
+
+saved = false;
+let l = 0;
 document.addEventListener('DOMContentLoaded', () => {
-    let themeSwitcher = document.querySelector('.theme-switch')
-    themeSwitcher.addEventListener('click', updateTheme, false)
+    let themeSwitcher = document.querySelector('.theme-switch');
+    themeSwitcher.addEventListener('click', updateTheme, false);
+
+    Array.from(document.getElementsByTagName('a')).forEach(el => {
+        el.addEventListener("click", e => {
+            if(!saved) {
+                e.preventDefault();
+                sketch.saveState();
+            }
+            
+            console.log(e.currentTarget);
+            l = e.currentTarget;
+            saved = true;
+            
+            // e.currentTarget.click();
+        });
+    });
 }, false)
 
 function setCookie(cname, cvalue, exdays) {
