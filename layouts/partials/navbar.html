@@ -11,7 +11,7 @@
             <li><a {{ if $isCurrent }} class="current"{{end}} href="{{ .URL | relLangURL}}" {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer" {{ end }} title="{{ .Title }}">{{ .Name }}</a></li>
         {{ end }}
         <li class="grow"></li>
-        {{ if .Site.IsMultiLingual }}
+        {{ if hugo.IsMultilingual }}
             {{ range $.Site.Home.Translations }}
                 <li><a href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</a></li>
             {{ end }}

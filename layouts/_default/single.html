@@ -22,7 +22,7 @@
         {{ partial "list-badges" . }}
     </div>
     {{ if eq .Type "post"}}
-        {{ if .Site.DisqusShortname }}
+        {{ if .Site.Config.Services.Disqus.Shortname }}
         <h2>{{ i18n "comments" }}</h2>
             {{ template "_internal/disqus.html" . }}
         {{ end }}

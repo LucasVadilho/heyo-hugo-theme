@@ -11,6 +11,8 @@ function setup() {
     let showHoverOptions = container.getAttribute('data-sketch-show-hover') === 'true';
     let sketchOptions = JSON.parse(container.getAttribute('data-sketch-starting') || "{}");
 
+    if(!(sketchName in SKETCHES)) sketchName = 'Graph';
+
     sketch = new Meta(sketchName, showHoverOptions, sketchOptions);
 }
 
