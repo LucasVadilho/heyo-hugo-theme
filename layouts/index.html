@@ -9,6 +9,16 @@
                         <img src={{ .src | absURL }} style="object-position: {{ .object_position }};" alt={{ .alt | default "thumbnail" }} title={{ .alt | default "thumbnail" }} loading="lazy">
                     </a>
                 </div>
+            {{ else }}
+                {{ with .Resources.ByType "image" }}
+                    {{ with .GetMatch (printf "**{%s}*" "feature,cover,thumbnail") }}
+                 <div class="thumbnail">
+                    <a href={{ $permalink }}>
+                        <img src={{ .RelPermalink | absURL }} alt="thumbnail" title="thumbnail" loading="lazy">
+                    </a>
+                </div>
+                    {{ end }}
+                {{ end }}
             {{ end }}
             <div class="post-text grow">
                 <div class="post-title">
