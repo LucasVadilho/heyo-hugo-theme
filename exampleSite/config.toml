@@ -39,30 +39,16 @@ paginate = 10
 # Sketch settings
 # you can also enable or disable it per page
 [params.sketch] 
-<<<<<<< HEAD
     enable = true 
     displayOptions = true
     # Graph, Digital Rain, or Circles
-    use = "Digital Rain"
+    use = "Boids"
     # JSON that is passed to the sketch constructor
     # You can check all the possible configurations in
     startingConfig = """{
         "kind": "katakana",
         "nStreams": 10
     }"""
-=======
-  enable = true 
-  displayOptions = true
-  # Graph, Digital Rain, or Circles
-  use = "Boids"
-  # JSON that is passed to the sketch constructor
-  # You can check all the possible configurations in
-  startingConfig = """{
-    "kind": "katakana",
-    "nStreams": 10
-  }"""
-
->>>>>>> 397128f (WIP)
 
 ## Math settings
 [params.math]

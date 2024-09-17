@@ -3,7 +3,7 @@ const SKETCHES = {
     'Digital Rain': DigitalRain,
     'Circles': CirclesBrushStrokes,
     'Boids': Boids,
-    'VizQuadtree': VizQuadtree,
+    'Quadtree Visualization': VizQuadtree,
 }
 
 class Meta {

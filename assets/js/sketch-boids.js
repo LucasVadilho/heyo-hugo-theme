@@ -482,16 +482,16 @@ class Boids {
         this.boids = this.loadBoids();
         
         if(this.boids.length > 0) {
-            console.log(121);
             this.nBoids = this.boids.length;
         }
         else{
             this.nBoids = 200;
             this.boids = this.clusterStart();
         }
+
         this.aabb = new AABB(createVector(0, 0), width, height);
         this.qt = new Quadtree(this.aabb, this.getQtCapacity(this.nBoids));
-        console.log(this.boids);
+        
         // // random start
         // for(let i = 0; i < this.nBoids; i++)
         //     this.boids.push(new Boid());
@@ -521,6 +521,7 @@ class Boids {
         }
 
         this.updateTheme();
+        this.lastSave = frameCount;
     }
 
     clusterStart() {
@@ -625,7 +626,8 @@ class Boids {
                 drawingContext.setLineDash([]);
             pop();
         }
-        // noLoop();
+        
+        this.saveState();
     }
 
     getQtCapacity(n) {
@@ -633,24 +635,21 @@ class Boids {
     }
 
     saveState() {
-        let boids = Array.from(this.boids, boid => boid.exportBoid());
+        if(frameCount < this.lastSave + 10) {
+            return;
+        }
 
+        let boids = Array.from(this.boids, boid => boid.exportBoid());
         window.localStorage.setItem('sketch-boids', JSON.stringify(boids));
+
+        this.lastSave = frameCount;
     }
 
     loadBoids() {
         let rawBoids = JSON.parse(window.localStorage.getItem('sketch-boids'));
 
-        if(rawBoids) {
-            console.log('boids found');
-            console.log(rawBoids);
-            let  a = Array.from(rawBoids, raw => Boid.loadBoid(raw));
-
-            return a;
-        } else {
-            console.log('no boids found');
-            return [];
-        }
+        if(rawBoids) return Array.from(rawBoids, raw => Boid.loadBoid(raw));
+        else return [];
     }
 
     windowResized() {
