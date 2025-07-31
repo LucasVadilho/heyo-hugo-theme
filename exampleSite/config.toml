@@ -7,7 +7,10 @@ defaultContentLanguageInSubdir = false
 summarylength = 100
 enableEmoji = true
 enableRobotsTXT = true
-paginate = 10
+[pagination]
+    disableAliases = false
+    pagerSize = 3
+    path = ''
 
 # Disqus comments
 # https://gohugo.io/templates/internal/#configure-disqus
